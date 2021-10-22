@@ -13,10 +13,33 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
 
     func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
-        // Use this method to optionally configure and attach the UIWindow `window` to the provided UIWindowScene `scene`.
-        // If using a storyboard, the `window` property will automatically be initialized and attached to the scene.
-        // This delegate does not imply the connecting scene or session are new (see `application:configurationForConnectingSceneSession` instead).
-        guard let _ = (scene as? UIWindowScene) else { return }
+
+        guard let ws = (scene as? UIWindowScene) else { return }
+        window = UIWindow(frame: ws.coordinateSpace.bounds)
+        window?.windowScene = ws
+        window?.rootViewController = createTabbar()
+        window?.makeKeyAndVisible()
+    }
+
+    private func createTabbar() -> UITabBarController {
+        let tabbar = UITabBarController()
+        UITabBar.appearance().tintColor = Configuration.Color.tabbarTintColor
+        tabbar.viewControllers = [createNewsNC(),createFavoritesNC()]
+        return tabbar
+    }
+
+    private func createNewsNC() -> UINavigationController {
+        let newsVC = NewsVC()
+        newsVC.title = "Appcent News App"
+        newsVC.tabBarItem = UITabBarItem(title: "News", image: UIImage(systemName: Configuration.IconImage.newsImageSF), tag: 0)
+        return UINavigationController(rootViewController: newsVC)
+    }
+
+    private func createFavoritesNC() -> UINavigationController {
+        let favoritesNC = FavoritesVC()
+        favoritesNC.title = "Favorites"
+        favoritesNC.tabBarItem = UITabBarItem(title: "Favorites", image: UIImage(systemName: Configuration.IconImage.favoritesImageSF), tag: 1)
+        return UINavigationController(rootViewController: favoritesNC)
     }
 
     func sceneDidDisconnect(_ scene: UIScene) {
