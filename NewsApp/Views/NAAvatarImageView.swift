@@ -8,9 +8,6 @@
 import UIKit
 
 class NAAvatarImageView: UIImageView {
-
-    var placeholderImage = UIImage(named: "volvo")!
-
     override init(frame: CGRect) {
         super.init(frame: frame)
         configure()
@@ -22,7 +19,6 @@ class NAAvatarImageView: UIImageView {
 
     private func configure() {
         sizeToFit()
-        image = placeholderImage
         translatesAutoresizingMaskIntoConstraints = false
     }
 

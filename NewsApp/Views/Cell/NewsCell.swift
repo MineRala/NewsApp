@@ -10,10 +10,18 @@ import SnapKit
 
 class NewsCell: UITableViewCell {
     static let reuseID = "NewsCell"
-    private lazy var newsTitle = NATitleLabel(fontSize: 20)
-    private lazy var newsDescription = NADescriptionLabel(fontSize: 12)
-    private lazy var newsImage = NAAvatarImageView(frame: .zero)
+    lazy var newsTitle = NATitleLabel(fontSize: 20)
+    lazy var newsDescription = NADescriptionLabel(fontSize: 12)
+    lazy var newsImage = NAAvatarImageView(frame: .zero)
     private lazy var padding: CGFloat = 8
+    private lazy var cornerRadius: CGFloat = 16
+
+    private lazy var containerView: UIView = {
+        let view = UIView()
+        view.backgroundColor = Configuration.Color.cellBackgroundColor
+        view.layer.cornerRadius = cornerRadius
+        return view
+    }()
 
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
@@ -24,13 +32,25 @@ class NewsCell: UITableViewCell {
         fatalError("init(coder:) has not been implemented")
     }
 
-    private func configureCell() {
-        self.contentView.addSubview(newsTitle)
-        self.contentView.addSubview(newsDescription)
-        self.contentView.addSubview(newsImage)
+    override func prepareForReuse() {
+        super.prepareForReuse()
+        newsTitle.text = nil
+        newsDescription.text = nil
+        newsImage.image = nil
+    }
 
-        newsTitle.text = "Yazı, ağızdan çıkan seslerin, fikirlerin ve görüşlerin mimik yardımı olmaksızın iletilmesini sağlayan,insanlar tarafından bulunan belirli işaret ve işaret sistemleri"
-        newsDescription.text = "İnsanların dil bilme yetisinin bir ürünü olan yazı, ifadelerin kayda geçmesinde ve diğer insanlara iletilmesinde kullanılan bir dizi form ve işaretten meydana gelir. Bu form ve işaretler dizisi icat edildiği günden bu zamana kadar çeşitli yüzeyler üzerinde bulunur.Yazının tarihi bu yüzeyler ile olan etkileşimiyle oldukça ilişkilidir.Yazı malzemelerinin incelenmesi yardımıyla yazının tarihi süreçteki bölgesel gelişimi gözlemlenebilir."
+    private func configureCell() {
+        self.contentView.addSubview(containerView)
+        self.containerView.addSubview(newsTitle)
+        self.containerView.addSubview(newsDescription)
+        self.containerView.addSubview(newsImage)
+
+        containerView.snp.makeConstraints { (make) in
+            make.top.equalToSuperview().offset(padding)
+            make.bottom.equalToSuperview().offset(-padding)
+            make.left.equalToSuperview().offset(padding)
+            make.right.equalToSuperview().offset(-padding)
+        }
 
         newsTitle.snp.makeConstraints { (make) in
             make.top.equalToSuperview()
@@ -46,13 +66,19 @@ class NewsCell: UITableViewCell {
             make.width.equalToSuperview().multipliedBy(0.7)
         }
 
+        newsImage.layer.cornerRadius = cornerRadius
+        newsImage.clipsToBounds = true
         newsImage.snp.makeConstraints { (make) in
-            make.bottom.equalToSuperview()
-            make.right.equalToSuperview()
-            make.top.equalTo(newsTitle.snp.top)
-            make.left.equalTo(newsDescription.snp.right).offset(padding/2)
+            make.bottom.equalToSuperview().offset(-padding)
+            make.right.equalToSuperview().offset(-padding)
+            make.top.equalTo(newsTitle.snp.top).offset(padding)
+            make.left.equalTo(newsDescription.snp.right).offset(padding)
 
         }
+    }
 
+    func setCell(title: String, description: String) {
+        newsTitle.text = title
+        newsDescription.text = description
     }
 }

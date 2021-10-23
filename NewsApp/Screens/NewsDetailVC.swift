@@ -6,13 +6,16 @@
 //
 
 import UIKit
+import SafariServices
 
-class NewsDetailVC: UIViewController {
+class NewsDetailVC: UIViewController, SFSafariViewControllerDelegate {
     private lazy var newsTitle = NATitleLabel(fontSize: 16)
     private lazy var newsDescription = NATextView()
     private lazy var newsImage = NAAvatarImageView(frame: .zero)
     private lazy var newsButton = NAButton(backgroundColor: Configuration.Color.buttonBackgroundColor, title: "News Source", textColor: Configuration.Color.buttonTextColor)
     private lazy var padding: CGFloat = 8
+
+    var viewModel = NewsDetailViewModel()
 
     private lazy var newsInfoStack: UIStackView = {
         let stackView = UIStackView()
@@ -24,12 +27,13 @@ class NewsDetailVC: UIViewController {
         return stackView
     }()
 
-    private lazy var authorNameView = NAView(viewType: .authorNameView, text: "Mine Rala")
-    private lazy var dateView = NAView(viewType: .dateView, text: "3 ağustos")
+    private lazy var authorNameView = NAView(viewType: .authorNameView, text: "")
+    private lazy var dateView = NAView(viewType: .dateView, text: "")
 
     override func viewDidLoad() {
         super.viewDidLoad()
         setUpUI()
+        setData()
     }
 
     private func setUpUI() {
@@ -49,14 +53,11 @@ class NewsDetailVC: UIViewController {
         newsTitle.backgroundColor = Configuration.Color.clearColor
         newsDescription.backgroundColor = Configuration.Color.clearColor
 
-        newsTitle.text = "Yazı, ağızdan çıkan seslerin, fikirlerin ve görüşlerin mimik yardımı olmaksızın iletilmesini sağlayan,insanlar tarafından bulunan belirli işaret ve işaret sistemleri"
-        newsDescription.text = "İnsanların dil bilme yetisinin bir ürünü olan yazı, ifadelerin kayda geçmesinde ve diğer insanlara iletilmesinde kullanılan bir dizi form ve işaretten meydana gelir. Bu form ve işaretler dizisi icat edildiği günden bu zamana kadar çeşitli yüzeyler üzerinde bulunur.Yazının tarihi bu yüzeyler ile olan etkileşimiyle oldukça ilişkilidir."
-
         newsImage.snp.makeConstraints { (make) in
             make.left.equalToSuperview().offset(padding)
             make.right.equalToSuperview().offset(-padding)
             make.top.equalToSuperview().offset(padding)
-            make.height.equalTo(view.snp.height).multipliedBy(0.4)
+            make.height.equalTo(view.snp.height).multipliedBy(0.45)
         }
 
         newsTitle.snp.makeConstraints { (make) in
@@ -68,7 +69,7 @@ class NewsDetailVC: UIViewController {
 
         newsInfoStack.snp.makeConstraints { (make) in
             make.top.equalTo(newsTitle.snp.bottom).offset(8)
-            make.width.equalTo(view.snp.width).multipliedBy(0.75)
+            make.width.equalTo(view.snp.width).multipliedBy(0.9)
             make.centerX.equalToSuperview()
             make.height.equalTo(view.snp.height).multipliedBy(0.05)
         }
@@ -86,6 +87,7 @@ class NewsDetailVC: UIViewController {
             make.bottom.equalTo(view.safeAreaLayoutGuide).offset(-padding)
             make.height.equalTo(view.snp.height).multipliedBy(0.06)
         }
+        newsButton.addTarget(self, action: #selector(newsSourceTapped), for: .touchUpInside)
     }
 
     private func configureNavigationBar() {
@@ -99,14 +101,39 @@ class NewsDetailVC: UIViewController {
         navigationItem.rightBarButtonItems = [favoriteButton, shareButton]
     }
 
-
-    @objc func favoriteButtonTapped() {
-        print("Favoride")
-        showToast(message: "The news has been added to your favorite list.", font: UIFont(name: Configuration.Font.medium.rawValue, size: 16)!)
-        }
-
-        @objc func shareButtonTapped() {
-        print("sharede")
+    private func setData() {
+        let url = URL(string: viewModel.news?.image ?? "")
+        newsImage.kf.setImage(with: url, placeholder: Configuration.IconImage.placeholder)
+        newsTitle.text = viewModel.news?.title
+        authorNameView.textLabel.text = viewModel.news?.author ?? "Unknown Author"
+        dateView.textLabel.text = viewModel.news?.publishDate ?? "Unknown Date"
+        newsDescription.text = viewModel.news.content
     }
 
+    @objc func shareButtonTapped() {
+        if let title = viewModel.news?.title, let author = viewModel.news.author, let newsWebsiteURL = NSURL(string: (viewModel.news?.urlLink)!) {
+        let shareNews = [title, author, newsWebsiteURL] as [Any]
+        let shareActivityViewController = UIActivityViewController(activityItems: shareNews, applicationActivities: nil)
+        self.present(shareActivityViewController, animated: true, completion: nil)
+        }
+    }
+
+    @objc func favoriteButtonTapped() {
+        showToast(message: "The news has been added to your favorite list.", font: UIFont(name: Configuration.Font.medium.rawValue, size: 16)!)
+        viewModel.makeFavoriteNews()
+    }
+
+    @objc func newsSourceTapped() {
+        guard let url = URL(string: (viewModel.news?.urlLink)!) else {
+            print(NAError.invalidURLLink)
+            return
+        }
+        let websiteVC = SFSafariViewController(url: url)
+        websiteVC.delegate = self
+        present(websiteVC, animated: true)
+    }
+
+    func safariViewControllerDidFinish(_ controller: SFSafariViewController) {
+        dismiss(animated: true)
+    }
 }

@@ -6,14 +6,24 @@
 //
 
 import UIKit
+import Kingfisher
 
-class NewsVC: UIViewController, UITableViewDataSource, UITableViewDelegate, UISearchBarDelegate {
-
+class NewsVC: UIViewController, UITableViewDataSource, UITableViewDelegate, UISearchBarDelegate, NewsViewModelDelegate {
+    func apiRequestCompleted() {
+        DispatchQueue.main.async {
+        self.tableViewNews.reloadData()
+        //   self.dismissLoadingView()
+        }
+    }
+    
     private lazy var tableViewNews = UITableView()
+    var viewModel = NewsViewModel()
 
     override func viewDidLoad() {
         super.viewDidLoad()
         setUpUI()
+        viewModel.delegate = self
+        viewModel.loadNews(key: "apple", page: 1)
     }
 
     private func setUpUI() {
@@ -30,6 +40,7 @@ class NewsVC: UIViewController, UITableViewDataSource, UITableViewDelegate, UISe
 
     private func configureSearchController() {
         let searchController = UISearchController()
+        searchController.obscuresBackgroundDuringPresentation = false
         searchController.searchBar.delegate = self
         searchController.searchBar.placeholder = "Search news"
         navigationItem.searchController = searchController
@@ -38,6 +49,7 @@ class NewsVC: UIViewController, UITableViewDataSource, UITableViewDelegate, UISe
     private func configureTableView() {
         self.view.addSubview(tableViewNews)
         tableViewNews.translatesAutoresizingMaskIntoConstraints = false
+        tableViewNews.separatorStyle = .none
          tableViewNews.snp.makeConstraints { (make) in
             make.edges.equalToSuperview()
         }
@@ -48,12 +60,16 @@ class NewsVC: UIViewController, UITableViewDataSource, UITableViewDelegate, UISe
     }
 
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 1
+        return viewModel.getNumberOfRowsInNewsList()
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: NewsCell.reuseID,for: indexPath) as! NewsCell
         cell.selectionStyle = .none
+        let news = viewModel.news[indexPath.row]
+        cell.setCell(title: news.title, description: news.description)
+        let url = URL(string: viewModel.news[indexPath.row].image ?? "")
+        cell.newsImage.kf.setImage(with: url, placeholder: Configuration.IconImage.placeholder)
         return cell
     }
 
@@ -62,8 +78,9 @@ class NewsVC: UIViewController, UITableViewDataSource, UITableViewDelegate, UISe
     }
 
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        tableView.deselectRow(at: indexPath, animated: true)
         let newsDetailVC = NewsDetailVC()
-        print("geçtik")
+        newsDetailVC.viewModel.news = viewModel.news[indexPath.row]
         navigationController?.pushViewController(newsDetailVC, animated: true)
     }
 }

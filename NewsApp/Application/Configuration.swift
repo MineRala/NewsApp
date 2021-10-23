@@ -26,7 +26,7 @@ struct Configuration {
         static let favoritesImageSF = "heart"
         static let calendarImageSF = "calendar"
         static let authorLaptopImageSF = "laptopcomputer"
-        static let placeholder = UIImage(named: "newsImage")
+        static let placeholder = UIImage(named: "icon")
         static let circleHeartImageSF = "heart.circle.fill"
     }
 
@@ -38,6 +38,7 @@ struct Configuration {
         static var descriptionColor: UIColor {#colorLiteral(red: 0.4392156863, green: 0.4392156863, blue: 0.4392156863, alpha: 1)}
         static var buttonTextColor: UIColor {#colorLiteral(red: 0.8666666667, green: 0.8666666667, blue: 0.8666666667, alpha: 1)}
         static var buttonBackgroundColor: UIColor {#colorLiteral(red: 0.3333333333, green: 0.3333333333, blue: 0.3333333333, alpha: 1)}
+        static var cellBackgroundColor: UIColor {#colorLiteral(red: 0.8430537581, green: 0.843195796, blue: 0.8430350423, alpha: 1)}
 
 
     }

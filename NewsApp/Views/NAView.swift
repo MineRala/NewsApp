@@ -14,7 +14,7 @@ enum ViewType {
 
 class NAView: UIView {
 
-    private lazy var textLabel = NATitleLabel(fontSize: 14)
+    lazy var textLabel = NATitleLabel(fontSize: 14)
     private lazy var iconImage = NAAvatarImageView(frame: .zero)
     let padding: CGFloat = 8
 
@@ -37,6 +37,7 @@ class NAView: UIView {
         translatesAutoresizingMaskIntoConstraints = false
         layer.cornerRadius = 20
         layer.masksToBounds = true
+        textLabel.minimumScaleFactor = 0.5
         backgroundColor = Configuration.Color.titleColor
         textLabel.textColor = Configuration.Color.viewBackground
 
@@ -59,7 +60,7 @@ class NAView: UIView {
             textLabel.text = text
         } else {
             iconImage.image = UIImage(systemName: Configuration.IconImage.calendarImageSF)
-            textLabel.text = text
+            textLabel.text = text.convertToDisplayFormat()
         }
 
     }
