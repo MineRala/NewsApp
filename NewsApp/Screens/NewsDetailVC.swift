@@ -107,7 +107,7 @@ class NewsDetailVC: UIViewController, SFSafariViewControllerDelegate {
         newsTitle.text = viewModel.news?.title
         authorNameView.textLabel.text = viewModel.news?.author ?? "Unknown Author"
         dateView.textLabel.text = viewModel.news?.publishDate ?? "Unknown Date"
-        newsDescription.text = viewModel.news.content
+        newsDescription.text = viewModel.news?.description ?? "Unknown Content"
     }
 
     @objc func shareButtonTapped() {
@@ -119,7 +119,7 @@ class NewsDetailVC: UIViewController, SFSafariViewControllerDelegate {
     }
 
     @objc func favoriteButtonTapped() {
-        showToast(message: "The news has been added to your favorite list.", font: UIFont(name: Configuration.Font.medium.rawValue, size: 16)!)
+        showToast(title: "Favorite news", text: "This news has been added to your favorite list.", delay: 2)
         viewModel.makeFavoriteNews()
     }
 

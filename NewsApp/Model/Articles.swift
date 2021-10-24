@@ -8,7 +8,7 @@
 import Foundation
 
 struct Articles: Codable {
-    let source: Source
+//    let source: Source
     let author: String?
     let title: String
     let description: String
@@ -18,7 +18,7 @@ struct Articles: Codable {
     let content: String
 
     enum CodingKeys: String, CodingKey {
-        case source = "source"
+      //  case source = "source"
         case author = "author"
         case title = "title"
         case description = "description"

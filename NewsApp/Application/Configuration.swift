@@ -39,6 +39,7 @@ struct Configuration {
         static var buttonTextColor: UIColor {#colorLiteral(red: 0.8666666667, green: 0.8666666667, blue: 0.8666666667, alpha: 1)}
         static var buttonBackgroundColor: UIColor {#colorLiteral(red: 0.3333333333, green: 0.3333333333, blue: 0.3333333333, alpha: 1)}
         static var cellBackgroundColor: UIColor {#colorLiteral(red: 0.8430537581, green: 0.843195796, blue: 0.8430350423, alpha: 1)}
+        static var redColor: UIColor {UIColor.red}
 
 
     }
