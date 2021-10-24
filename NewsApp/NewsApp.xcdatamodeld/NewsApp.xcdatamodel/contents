@@ -1,4 +1,15 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="1" systemVersion="11A491" minimumToolsVersion="Automatic" sourceLanguage="Swift" usedWithCloudKit="false" userDefinedModelVersionIdentifier="">
-    <elements/>
+<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="17709" systemVersion="20G80" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
+    <entity name="FavoriteNewsItem" representedClassName="FavoriteNewsItem" syncable="YES">
+        <attribute name="newsAuthor" optional="YES" attributeType="String"/>
+        <attribute name="newsContent" optional="YES" attributeType="String"/>
+        <attribute name="newsDescription" optional="YES" attributeType="String"/>
+        <attribute name="newsImage" optional="YES" attributeType="String"/>
+        <attribute name="newsPublishDate" optional="YES" attributeType="String"/>
+        <attribute name="newsTitle" optional="YES" attributeType="String"/>
+        <attribute name="newsUrlLink" optional="YES" attributeType="String"/>
+    </entity>
+    <elements>
+        <element name="FavoriteNewsItem" positionX="-18" positionY="27" width="128" height="134"/>
+    </elements>
 </model>

@@ -5,39 +5,32 @@
 //  Created by Mine Rala on 21.10.2021.
 //
 
-import Foundation
+import UIKit
 
 final class NewsDetailViewModel {
 
-  //  let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
+    let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
     private var service = NetworkManager.shared
 
     var news: Articles!
 
-    func makeFavoriteNews() {
-      //  let favoriteNews = NewsItem()
-    }
+        func makeFavoriteNews() {
+            let favoriteNews = FavoriteNewsItem(context: context)
+            favoriteNews.newsAuthor = news?.author
+            favoriteNews.newsContent = news?.content
+            favoriteNews.newsImage = news?.image
+            favoriteNews.newsDescription = news?.description
+            favoriteNews.newsPublishDate = news?.publishDate
+            favoriteNews.newsTitle = news?.title
+            favoriteNews.newsUrlLink = news?.urlLink
+
+            do {
+                try context.save()
+
+            } catch {
+                print("coreData error")
+            }
+        }
+
 }
 
-
-////MARK: - Core Data
-//extension NewsDetailViewModel {
-//
-//    func favoriteNews() {
-//        let newFavoriteNews = FavoriteNewsItem(context: context)
-//        newFavoriteNews.author = news?.author
-//        newFavoriteNews.content = news?.content
-//        newFavoriteNews.image = news?.image
-//        newFavoriteNews.newsDescription = news?.description
-//        newFavoriteNews.publishDate = news?.publishDate
-//        newFavoriteNews.title = news?.title
-//        newFavoriteNews.urlLink = news?.urlLink
-//
-//        do {
-//            try context.save()
-//
-//        } catch {
-//            print("coreData error")
-//        }
-//    }
-//}
