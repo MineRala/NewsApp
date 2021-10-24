@@ -17,18 +17,9 @@ class FavoritesVC: UIViewController, UITableViewDataSource, UITableViewDelegate,
     private lazy var tableViewFavorites = UITableView()
     let favorite : [NewsModel] = []
 
-    private let labelEmptyScreen: UILabel = {
-        let les = UILabel(frame: .zero)
-        les.translatesAutoresizingMaskIntoConstraints = false
-        les.backgroundColor = UIColor.clear
-        les.text = "Favorite News List Is Empty!"
-        les.numberOfLines = 0
-        les.textAlignment = .center
-        les.adjustsFontForContentSizeCategory = true
-        let font = UIFont(name: "Montserrat-Regular", size: 21)!
-        les.font = UIFontMetrics.default.scaledFont(for: font)
-        return les
-    }()
+
+    private lazy var emptyListLabel = NATitleLabel(fontSize: 24)
+
 
     override func viewDidLoad() {
     super.viewDidLoad()
@@ -39,6 +30,7 @@ class FavoritesVC: UIViewController, UITableViewDataSource, UITableViewDelegate,
     self.view.backgroundColor = Configuration.Color.viewBackground
         configureNavigationBarTitle()
         configureTableView()
+        configureEmptyListLabel()
     }
 
     override func viewDidLayoutSubviews() {
@@ -57,28 +49,35 @@ class FavoritesVC: UIViewController, UITableViewDataSource, UITableViewDelegate,
         self.navigationController?.navigationBar.titleTextAttributes = attributes as [NSAttributedString.Key : Any]
     }
 
-    private func configureTableView() {
-    self.view.addSubview(tableViewFavorites)
-        tableViewFavorites.translatesAutoresizingMaskIntoConstraints = false
-        tableViewFavorites.backgroundColor = Configuration.Color.clearColor
-        tableViewFavorites.dataSource = self
-        tableViewFavorites.delegate = self
-        tableViewFavorites.register(NewsCell.self, forCellReuseIdentifier: NewsCell.reuseID)
 
-        self.view.addSubview(labelEmptyScreen)
-        labelEmptyScreen.topAnchor.constraint(equalTo: view.topAnchor, constant: 0).isActive = true
-        labelEmptyScreen.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 0).isActive = true
-        labelEmptyScreen.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: 0).isActive = true
-        labelEmptyScreen.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: 0).isActive = true
+    private func configureTableView() {
+        self.view.addSubview(tableViewFavorites)
+            tableViewFavorites.translatesAutoresizingMaskIntoConstraints = false
+            tableViewFavorites.backgroundColor = Configuration.Color.clearColor
+            tableViewFavorites.dataSource = self
+            tableViewFavorites.delegate = self
+            tableViewFavorites.register(NewsCell.self, forCellReuseIdentifier: NewsCell.reuseID)
+    }
+
+    private func configureEmptyListLabel() {
+        emptyListLabel.backgroundColor = Configuration.Color.clearColor
+        emptyListLabel.textAlignment = .center
+        emptyListLabel.adjustsFontForContentSizeCategory = true
+        emptyListLabel.text = "Your favorite news list is empty!"
+
+        self.view.addSubview(emptyListLabel)
+        emptyListLabel.snp.makeConstraints { (make) in
+            make.edges.equalToSuperview()
+        }
     }
 
     private func reloadTableView() {
         if favorite.count == 0 {
             tableViewFavorites.alpha = 0
-            labelEmptyScreen.alpha = 1
-        }else{
+            emptyListLabel.alpha = 1
+        } else {
             tableViewFavorites.alpha = 1
-            labelEmptyScreen.alpha = 0
+            emptyListLabel.alpha = 0
         }
         tableViewFavorites.reloadData()
     }
