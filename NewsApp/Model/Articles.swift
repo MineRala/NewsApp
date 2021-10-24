@@ -8,17 +8,17 @@
 import Foundation
 
 struct Articles: Codable {
-//    let source: Source
+    let source: Source
     let author: String?
-    let title: String
-    let description: String
-    let urlLink: String
+    let title: String?
+    let description: String?
+    let urlLink: String?
     let image: String?
-    let publishDate: String
-    let content: String
+    let publishDate: String?
+    let content: String?
 
     enum CodingKeys: String, CodingKey {
-      //  case source = "source"
+        case source = "source"
         case author = "author"
         case title = "title"
         case description = "description"

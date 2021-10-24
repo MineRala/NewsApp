@@ -7,64 +7,48 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            uuid = "52F61E7E-188C-4460-9236-B090B326397F"
+            uuid = "A8DD091C-FF70-4EE7-8F81-89A07EE36307"
             shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "NewsApp/Screens/FavoritesVC.swift"
+            filePath = "NewsApp/Managers/NetworkManager.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "74"
-            endingLineNumber = "74"
-            landmarkName = "reloadTableView()"
+            startingLineNumber = "31"
+            endingLineNumber = "31"
+            landmarkName = "getTopNews(page:completed:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            uuid = "2D3CDF18-EA4A-4F0E-A7C0-E72991D205A0"
+            uuid = "08AED90D-3890-43BC-9279-34EF0A98015C"
             shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "NewsApp/Screens/FavoritesVC.swift"
+            filePath = "NewsApp/Managers/NetworkManager.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "72"
-            endingLineNumber = "72"
-            landmarkName = "reloadTableView()"
+            startingLineNumber = "30"
+            endingLineNumber = "30"
+            landmarkName = "getTopNews(page:completed:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            uuid = "BAB94F67-9924-47E9-9422-993A62AD813A"
+            uuid = "59DD8093-D1C6-4D6B-9F2C-A72296B108B3"
             shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "NewsApp/Screens/FavoritesVC.swift"
+            filePath = "NewsApp/Managers/NetworkManager.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "73"
-            endingLineNumber = "73"
-            landmarkName = "reloadTableView()"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            uuid = "E695F5FC-D027-4511-A495-B35B92122C4D"
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "NewsApp/Screens/FavoritesVC.swift"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "71"
-            endingLineNumber = "71"
-            landmarkName = "reloadTableView()"
+            startingLineNumber = "29"
+            endingLineNumber = "29"
+            landmarkName = "getTopNews(page:completed:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>

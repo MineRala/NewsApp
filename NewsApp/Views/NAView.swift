@@ -17,6 +17,7 @@ class NAView: UIView {
     lazy var textLabel = NATitleLabel(fontSize: 14)
     private lazy var iconImage = NAAvatarImageView(frame: .zero)
     let padding: CGFloat = 8
+    var viewType: ViewType = .authorNameView
 
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -26,12 +27,13 @@ class NAView: UIView {
         fatalError("init(coder:) has not been implemented")
     }
 
-    init(viewType: ViewType, text: String) {
+    init(viewType: ViewType) {
         super.init(frame: .zero)
-        configure(viewType: viewType, text: text)
+        self.viewType = viewType
+        configure(viewType: viewType)
     }
 
-    private func configure(viewType: ViewType, text: String) {
+    private func configure(viewType: ViewType) {
         self.addSubview(textLabel)
         self.addSubview(iconImage)
         translatesAutoresizingMaskIntoConstraints = false
@@ -54,7 +56,9 @@ class NAView: UIView {
             make.right.equalToSuperview().offset(-padding)
             make.height.equalToSuperview().multipliedBy(0.5)
         }
+    }
 
+    func setText(text: String) {
         if viewType == .authorNameView {
             iconImage.image = UIImage(systemName: Configuration.IconImage.authorLaptopImageSF)
             textLabel.text = text
@@ -62,6 +66,5 @@ class NAView: UIView {
             iconImage.image = UIImage(systemName: Configuration.IconImage.calendarImageSF)
             textLabel.text = text.convertToDisplayFormat()
         }
-
     }
 }

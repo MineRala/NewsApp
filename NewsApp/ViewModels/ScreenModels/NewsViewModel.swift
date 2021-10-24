@@ -17,16 +17,33 @@ class NewsViewModel {
     private var service = NetworkManager.shared
 
     var news: [Articles] = []
+    var searchApi: [Articles] = []
 
-    func loadNews(key: String?, page: Int) {
-        service.getNews(keyword: key ?? "home", page: page) { [weak self] result in
-            self!.delegate?.apiRequestCompleted()
+    func loadNews(page: Int) {
+        service.getTopNews(page: page) { result in
+            self.delegate?.apiRequestCompleted()
             switch result {
             case .success(let news):
-                page == 1 ? self!.news = news : self!.news.append(contentsOf: news)
+                page == 1 ? self.news = news : self.news.append(contentsOf: news)
+                self.delegate?.apiRequestCompleted()
             case .failure(let error):
-                print(error.localizedDescription)
+                print(error)
             }
+
+        }
+    }
+
+    func loadNewsBySearch(query: String, page: Int) {
+        service.getNewsBySearch(with:query, page: page) { result in
+            self.delegate?.apiRequestCompleted()
+            switch result {
+            case .success(let news):
+                page == 1 ? self.news = news : self.news.append(contentsOf: news)
+                self.delegate?.apiRequestCompleted()
+            case .failure(let error):
+                print(error)
+            }
+
         }
     }
 

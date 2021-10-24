@@ -27,8 +27,8 @@ class NewsDetailVC: UIViewController, SFSafariViewControllerDelegate {
         return stackView
     }()
 
-    private lazy var authorNameView = NAView(viewType: .authorNameView, text: "")
-    private lazy var dateView = NAView(viewType: .dateView, text: "")
+    private lazy var authorNameView = NAView(viewType: .authorNameView)
+    private lazy var dateView = NAView(viewType: .dateView)
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -105,9 +105,9 @@ class NewsDetailVC: UIViewController, SFSafariViewControllerDelegate {
         let url = URL(string: viewModel.news?.image ?? "")
         newsImage.kf.setImage(with: url, placeholder: Configuration.IconImage.placeholder)
         newsTitle.text = viewModel.news?.title
-        authorNameView.textLabel.text = viewModel.news?.author ?? "Unknown Author"
-        dateView.textLabel.text = viewModel.news?.publishDate ?? "Unknown Date"
-        newsDescription.text = viewModel.news?.description ?? "Unknown Content"
+        authorNameView.setText(text: viewModel.news?.author  ?? "Unknown Author")
+        dateView.setText(text: viewModel.news?.publishDate ?? "Unknown Date")
+        newsDescription.text = viewModel.news?.description ?? "Unknown Description"
     }
 
     @objc func shareButtonTapped() {

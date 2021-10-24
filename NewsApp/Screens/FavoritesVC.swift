@@ -8,11 +8,7 @@
 import UIKit
 import SnapKit
 
-protocol FavoritesVCInterface {
-func setUpUI()
-}
-
-class FavoritesVC: UIViewController, UITableViewDataSource, UITableViewDelegate, FavoritesVCInterface {
+class FavoritesVC: UIViewController, UITableViewDataSource, UITableViewDelegate {
     
     private lazy var tableViewFavorites = UITableView()
     private lazy var emptyListLabel = NATitleLabel(fontSize: 24)
@@ -102,7 +98,16 @@ class FavoritesVC: UIViewController, UITableViewDataSource, UITableViewDelegate,
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
         let newsDetailVC = NewsDetailVC()
-      //  newsDetailVC.viewModel.news = viewModel.favoritedNews[indexPath.row] as! Articles
+        let favoriteNewsArray = viewModel.favoritedNews[indexPath.row]
+        let favoriteNews = Articles(source: Source(id: "", name: ""),
+                                    author: favoriteNewsArray.newsAuthor,
+                                    title: favoriteNewsArray.newsTitle,
+                                    description: favoriteNewsArray.newsDescription,
+                                    urlLink: favoriteNewsArray.newsUrlLink,
+                                    image: viewModel.favoritedNews[indexPath.row].newsImage,
+                                    publishDate: favoriteNewsArray.newsPublishDate,
+                                    content: favoriteNewsArray.newsContent)
+        newsDetailVC.viewModel.news = favoriteNews
         navigationController?.pushViewController(newsDetailVC, animated: true)
     }
 
