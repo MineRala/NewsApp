@@ -9,13 +9,7 @@ import UIKit
 import Kingfisher
 
 class NewsVC: UIViewController, UITableViewDataSource, UITableViewDelegate, UISearchBarDelegate, NewsViewModelDelegate {
-    func apiRequestCompleted() {
-        DispatchQueue.main.async {
-        self.tableViewNews.reloadData()
-        //   self.dismissLoadingView()
-        }
-    }
-    
+
     private lazy var tableViewNews = UITableView()
     var viewModel = NewsViewModel()
     var searchNewsText: String = ""
@@ -28,29 +22,24 @@ class NewsVC: UIViewController, UITableViewDataSource, UITableViewDelegate, UISe
         setUpUI()
         viewModel.delegate = self
         viewModel.loadNews(page: 1)
+    }
 
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
     }
 
     private func setUpUI() {
         self.view.backgroundColor = Configuration.Color.viewBackground
         configureNavigationBarTitle()
         createSearchBar()
-     //   configureSearchController()
         configureTableView()
+
     }
 
     private func configureNavigationBarTitle() {
         let attributes = [NSAttributedString.Key.foregroundColor: Configuration.Color.titleColor, NSAttributedString.Key.font : UIFont(name: Configuration.Font.medium.rawValue, size: 24)!]
         self.navigationController?.navigationBar.titleTextAttributes = attributes as [NSAttributedString.Key : Any]
     }
-
-//    private func configureSearchController() {
-//        let searchController = UISearchController()
-//        searchController.obscuresBackgroundDuringPresentation = false
-//        searchController.searchBar.delegate = self
-//        searchController.searchBar.placeholder = "Search news"
-//        navigationItem.searchController = searchController
-//    }
 
     private func createSearchBar() {
         navigationItem.searchController = searchVC
@@ -70,17 +59,31 @@ class NewsVC: UIViewController, UITableViewDataSource, UITableViewDelegate, UISe
         tableViewNews.register(NewsCell.self, forCellReuseIdentifier: NewsCell.reuseID)
     }
 
-    func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
-
-        guard let text = searchBar.text, !text.isEmpty else {
-            return
+    func loadIndicatorForApiRequestCompleted() {
+        DispatchQueue.main.async {
+                self.showLoadingView()
         }
+    }
+
+    func dissmissIndicatorForApiRequestCompleted() {
+        DispatchQueue.main.asyncAfter(wallDeadline: .now() + .milliseconds(30), execute: { [weak self] in
+            self!.dismissLoadingView()
+        })
+    }
+
+    func reloadTableViewAfterIndicator() {
+        DispatchQueue.main.async {
+            self.tableViewNews.reloadData()
+        }
+    }
+
+    func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
+        guard let text = searchBar.text, !text.isEmpty else { return }
         viewModel.loadNewsBySearch(query: text, page: 1)
         self.searchVC.dismiss(animated: true, completion: nil)
         print(text)
         searchNewsText = text
         print(searchNewsText)
-
     }
 
     func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
@@ -88,25 +91,10 @@ class NewsVC: UIViewController, UITableViewDataSource, UITableViewDelegate, UISe
         self.searchVC.dismiss(animated: true, completion: nil)
     }
 
-
-
-//    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
-//        self.searchNewsText = searchText
-//        NSObject.cancelPreviousPerformRequests(withTarget: self, selector: #selector(self.searchNewText), object: nil)
-//        perform(#selector(self.searchNewText), with: nil, afterDelay: 0.5)
-//    }
-//
-//    @objc private func searchNewText(text: String) {
-//        if self.searchNewsText.count > 3 {
-//            viewModel.news = []
-//            viewModel.loadNews(page: page)
-//        }
-//    }
-
     func scrollViewDidEndDragging(_ scrollView: UIScrollView, willDecelerate decelerate: Bool) {
-        let offsetY         = scrollView.contentOffset.y
-        let contentHeight   = scrollView.contentSize.height
-        let height          = scrollView.frame.size.height
+        let offsetY = scrollView.contentOffset.y
+        let contentHeight = scrollView.contentSize.height
+        let height = scrollView.frame.size.height
 
         if offsetY > contentHeight - height {
             if searchNewsText.isEmpty {

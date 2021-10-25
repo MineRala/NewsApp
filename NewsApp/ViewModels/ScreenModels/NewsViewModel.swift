@@ -8,7 +8,9 @@
 import Foundation
 
 protocol NewsViewModelDelegate: class {
-    func apiRequestCompleted()
+    func loadIndicatorForApiRequestCompleted()
+    func dissmissIndicatorForApiRequestCompleted()
+    func reloadTableViewAfterIndicator()
 }
 
 class NewsViewModel {
@@ -17,15 +19,15 @@ class NewsViewModel {
     private var service = NetworkManager.shared
 
     var news: [Articles] = []
-    var searchApi: [Articles] = []
 
     func loadNews(page: Int) {
+        self.delegate?.loadIndicatorForApiRequestCompleted()
         service.getTopNews(page: page) { result in
-            self.delegate?.apiRequestCompleted()
+            self.delegate?.dissmissIndicatorForApiRequestCompleted()
             switch result {
             case .success(let news):
                 page == 1 ? self.news = news : self.news.append(contentsOf: news)
-                self.delegate?.apiRequestCompleted()
+                self.delegate?.reloadTableViewAfterIndicator()
             case .failure(let error):
                 print(error)
             }
@@ -34,12 +36,13 @@ class NewsViewModel {
     }
 
     func loadNewsBySearch(query: String, page: Int) {
+        self.delegate?.loadIndicatorForApiRequestCompleted()
         service.getNewsBySearch(with:query, page: page) { result in
-            self.delegate?.apiRequestCompleted()
+            self.delegate?.dissmissIndicatorForApiRequestCompleted()
             switch result {
             case .success(let news):
                 page == 1 ? self.news = news : self.news.append(contentsOf: news)
-                self.delegate?.apiRequestCompleted()
+                self.delegate?.reloadTableViewAfterIndicator()
             case .failure(let error):
                 print(error)
             }

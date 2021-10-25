@@ -17,7 +17,9 @@ class FavoritesVC: UIViewController, UITableViewDataSource, UITableViewDelegate 
 
     override func viewDidLoad() {
     super.viewDidLoad()
+
         setUpUI()
+
     }
 
     func setUpUI() {
@@ -65,6 +67,7 @@ class FavoritesVC: UIViewController, UITableViewDataSource, UITableViewDelegate 
     }
 
     private func reloadTableView() {
+        self.showLoadingView()
         if viewModel.favoritedNews.count == 0 {
             tableViewFavorites.alpha = 0
             emptyListLabel.alpha = 1
@@ -73,6 +76,9 @@ class FavoritesVC: UIViewController, UITableViewDataSource, UITableViewDelegate 
             emptyListLabel.alpha = 0
         }
         tableViewFavorites.reloadData()
+        DispatchQueue.main.asyncAfter(wallDeadline: .now() + .milliseconds(5), execute: { [weak self] in
+            self!.dismissLoadingView()
+        })
     }
 
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
