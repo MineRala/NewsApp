@@ -60,10 +60,10 @@ class NAView: UIView {
 
     func setText(text: String) {
         if viewType == .authorNameView {
-            iconImage.image = UIImage(systemName: Configuration.IconImage.authorLaptopImageSF)
+            iconImage.image = UIImage(systemName: Configuration.IconImage.authorIcon)
             textLabel.text = text
         } else {
-            iconImage.image = UIImage(systemName: Configuration.IconImage.calendarImageSF)
+            iconImage.image = UIImage(systemName: Configuration.IconImage.calendarIcon)
             textLabel.text = text.convertToDisplayFormat()
         }
     }

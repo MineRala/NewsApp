@@ -9,21 +9,19 @@ import UIKit
 import SnapKit
 
 class FavoritesVC: UIViewController, UITableViewDataSource, UITableViewDelegate {
-    
+
     private lazy var tableViewFavorites = UITableView()
     private lazy var emptyListLabel = NATitleLabel(fontSize: 24)
 
     let viewModel = FavoritesTableViewModel()
 
     override func viewDidLoad() {
-    super.viewDidLoad()
-
+        super.viewDidLoad()
         setUpUI()
-
     }
 
     func setUpUI() {
-    self.view.backgroundColor = Configuration.Color.viewBackground
+        self.view.backgroundColor = Configuration.Color.viewBackground
         configureNavigationBarTitle()
         configureTableView()
         configureEmptyListLabel()
@@ -36,7 +34,7 @@ class FavoritesVC: UIViewController, UITableViewDataSource, UITableViewDelegate 
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        viewModel.getFavoritedNews()
+        viewModel.getFavoritedNewsItem()
         reloadTableView()
     }
 
@@ -47,11 +45,12 @@ class FavoritesVC: UIViewController, UITableViewDataSource, UITableViewDelegate 
 
     private func configureTableView() {
         self.view.addSubview(tableViewFavorites)
-            tableViewFavorites.translatesAutoresizingMaskIntoConstraints = false
-            tableViewFavorites.backgroundColor = Configuration.Color.clearColor
-            tableViewFavorites.dataSource = self
-            tableViewFavorites.delegate = self
-            tableViewFavorites.register(NewsCell.self, forCellReuseIdentifier: NewsCell.reuseID)
+        tableViewFavorites.translatesAutoresizingMaskIntoConstraints = false
+        tableViewFavorites.backgroundColor = Configuration.Color.clearColor
+        tableViewFavorites.dataSource = self
+        tableViewFavorites.delegate = self
+        tableViewFavorites.separatorStyle = .none
+        tableViewFavorites.register(NewsCell.self, forCellReuseIdentifier: NewsCell.reuseID)
     }
 
     private func configureEmptyListLabel() {
@@ -59,10 +58,9 @@ class FavoritesVC: UIViewController, UITableViewDataSource, UITableViewDelegate 
         emptyListLabel.textAlignment = .center
         emptyListLabel.adjustsFontForContentSizeCategory = true
         emptyListLabel.text = "Your favorite news list is empty!"
-
         self.view.addSubview(emptyListLabel)
         emptyListLabel.snp.makeConstraints { (make) in
-            make.edges.equalToSuperview()
+        make.edges.equalToSuperview()
         }
     }
 
@@ -106,13 +104,13 @@ class FavoritesVC: UIViewController, UITableViewDataSource, UITableViewDelegate 
         let newsDetailVC = NewsDetailVC()
         let favoriteNewsArray = viewModel.favoritedNews[indexPath.row]
         let favoriteNews = Articles(source: Source(id: "", name: ""),
-                                    author: favoriteNewsArray.newsAuthor,
-                                    title: favoriteNewsArray.newsTitle,
-                                    description: favoriteNewsArray.newsDescription,
-                                    urlLink: favoriteNewsArray.newsUrlLink,
-                                    image: viewModel.favoritedNews[indexPath.row].newsImage,
-                                    publishDate: favoriteNewsArray.newsPublishDate,
-                                    content: favoriteNewsArray.newsContent)
+                            author: favoriteNewsArray.newsAuthor,
+                            title: favoriteNewsArray.newsTitle,
+                            description: favoriteNewsArray.newsDescription,
+                            urlLink: favoriteNewsArray.newsUrlLink,
+                            image: viewModel.favoritedNews[indexPath.row].newsImage,
+                            publishDate: favoriteNewsArray.newsPublishDate,
+                            content: favoriteNewsArray.newsContent)
         newsDetailVC.viewModel.news = favoriteNews
         navigationController?.pushViewController(newsDetailVC, animated: true)
     }
@@ -120,28 +118,23 @@ class FavoritesVC: UIViewController, UITableViewDataSource, UITableViewDelegate 
     func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
         let delete = UIContextualAction(style: .normal, title: "Delete") { [weak self] (action, view, completionHandler) in
             guard let self = self else{
-                completionHandler(false)
-                return
+            completionHandler(false)
+            return
             }
-
-            self.handleDelete(indexPath: indexPath)
-            completionHandler(true)
+        self.handleDelete(indexPath: indexPath)
+        completionHandler(true)
         }
-
-        delete.backgroundColor = .red
-
+        delete.backgroundColor = Configuration.Color.redColor
         let configuration = UISwipeActionsConfiguration(actions: [delete])
         return configuration
     }
 
     private func handleDelete(indexPath: IndexPath) {
-        Alerts.showAlertDelete(controller: self, "Are you sure you want to delete this news from favorite list?") {
-            [self] in
-            self.viewModel.deleteFavoriteNews(item: self.viewModel.favoritedNews[indexPath.row])
-            viewModel.getFavoritedNews()
+        Alerts.showAlertDelete(controller: self, "Are you sure you want to delete this news from favorite list?") { [self] in
+            self.viewModel.deleteFavoriteNewsItem(item: self.viewModel.favoritedNews[indexPath.row])
+            viewModel.getFavoritedNewsItem()
             tableViewFavorites.deleteRows(at: [indexPath], with: .fade)
             reloadTableView()
         }
-
     }
 }

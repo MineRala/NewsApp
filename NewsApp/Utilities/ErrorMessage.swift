@@ -14,5 +14,7 @@ enum NAError: String, Error {
     case invalidData = "The data received from the server was invalid. Please try again."
     case invalidURLLink = "Invalid link. Please check the link."
     case invalidURL = "Invalid URL."
+    case checkingError = "Data couldn't be checked"
+    case coreDataError = "There is a core data error, please check."
 }
 

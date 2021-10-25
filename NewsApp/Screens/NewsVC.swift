@@ -50,9 +50,9 @@ class NewsVC: UIViewController, UITableViewDataSource, UITableViewDelegate, UISe
         self.view.addSubview(tableViewNews)
         tableViewNews.translatesAutoresizingMaskIntoConstraints = false
         tableViewNews.separatorStyle = .none
-         tableViewNews.snp.makeConstraints { (make) in
+        tableViewNews.snp.makeConstraints { (make) in
             make.edges.equalToSuperview()
-        }
+            }
         tableViewNews.backgroundColor = Configuration.Color.clearColor
         tableViewNews.dataSource = self
         tableViewNews.delegate = self
@@ -61,7 +61,7 @@ class NewsVC: UIViewController, UITableViewDataSource, UITableViewDelegate, UISe
 
     func loadIndicatorForApiRequestCompleted() {
         DispatchQueue.main.async {
-                self.showLoadingView()
+            self.showLoadingView()
         }
     }
 

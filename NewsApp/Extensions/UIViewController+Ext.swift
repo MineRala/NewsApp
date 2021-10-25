@@ -28,14 +28,14 @@ extension UIViewController {
         containerView.alpha = 0
         UIView.animate(withDuration: 0.25) {
         containerView.alpha = 0.8
-    }
-    let activityIndicator = UIActivityIndicatorView(style: .large)
-    containerView.addSubview(activityIndicator)
-    activityIndicator.translatesAutoresizingMaskIntoConstraints = false
-    activityIndicator.snp.makeConstraints { (make) in
-    make.centerX.equalToSuperview()
-    make.centerY.equalToSuperview()
-    activityIndicator.startAnimating()
+            }
+        let activityIndicator = UIActivityIndicatorView(style: .large)
+        containerView.addSubview(activityIndicator)
+        activityIndicator.translatesAutoresizingMaskIntoConstraints = false
+        activityIndicator.snp.makeConstraints { (make) in
+        make.centerX.equalToSuperview()
+        make.centerY.equalToSuperview()
+        activityIndicator.startAnimating()
         }
     }
 

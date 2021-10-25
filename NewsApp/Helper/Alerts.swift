@@ -22,4 +22,11 @@ class Alerts: NSObject {
          }))
          controller.present(dialogMessage, animated: true, completion: {})
     }
+
+    static func showAlert(controller: UIViewController,title:String, message: String, completion: @escaping () -> Void) {
+        let dialogMessage = UIAlertController(title: title, message: message, preferredStyle: .alert)
+        let okAction = UIAlertAction(title: "OK", style: .default) { (_) in }
+        dialogMessage.addAction(okAction)
+        controller.present(dialogMessage, animated: true, completion: nil)
+    }
 }

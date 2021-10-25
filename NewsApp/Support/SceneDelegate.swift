@@ -31,14 +31,14 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     private func createNewsNC() -> UINavigationController {
         let newsVC = NewsVC()
         newsVC.title = "Appcent News App"
-        newsVC.tabBarItem = UITabBarItem(title: "News", image: UIImage(systemName: Configuration.IconImage.newsImageSF), tag: 0)
+        newsVC.tabBarItem = UITabBarItem(title: "News", image: UIImage(systemName: Configuration.IconImage.newsIcon), tag: 0)
         return UINavigationController(rootViewController: newsVC)
     }
 
     private func createFavoritesNC() -> UINavigationController {
         let favoritesNC = FavoritesVC()
         favoritesNC.title = "Favorites"
-        favoritesNC.tabBarItem = UITabBarItem(title: "Favorites", image: UIImage(systemName: Configuration.IconImage.favoritesImageSF), tag: 1)
+        favoritesNC.tabBarItem = UITabBarItem(title: "Favorites", image: UIImage(systemName: Configuration.IconImage.favoritesIcon), tag: 1)
         return UINavigationController(rootViewController: favoritesNC)
     }
 

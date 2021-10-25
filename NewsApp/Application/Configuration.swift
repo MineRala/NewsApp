@@ -22,12 +22,12 @@ struct Configuration {
     }
 
     enum IconImage {
-        static let newsImageSF = "newspaper"
-        static let favoritesImageSF = "heart"
-        static let calendarImageSF = "calendar"
-        static let authorLaptopImageSF = "laptopcomputer"
         static let placeholder = UIImage(named: "icon")
-        static let circleHeartImageSF = "heart.circle.fill"
+        static let newsIcon = "newspaper"
+        static let favoritesIcon = "heart"
+        static let calendarIcon = "calendar"
+        static let authorIcon = "newspaper.fill"
+        static let favoriteFillIcon = "heart.circle.fill"
     }
 
     struct Color {
@@ -40,7 +40,6 @@ struct Configuration {
         static var buttonBackgroundColor: UIColor {#colorLiteral(red: 0.3333333333, green: 0.3333333333, blue: 0.3333333333, alpha: 1)}
         static var cellBackgroundColor: UIColor {#colorLiteral(red: 0.8430537581, green: 0.843195796, blue: 0.8430350423, alpha: 1)}
         static var redColor: UIColor {UIColor.red}
-
-
+        static var blackColor: UIColor {UIColor.black}
     }
 }

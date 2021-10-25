@@ -10,7 +10,7 @@ import Foundation
 extension Date {
     func convertToMonthYearFormat() -> String {
           let dateFormatter = DateFormatter()
-          dateFormatter.dateFormat = "dd MMM yyyy"
+          dateFormatter.dateFormat = "dd.MM.yyyy"
           return dateFormatter.string(from: self)
       }
 }
@@ -21,11 +21,9 @@ extension String {
          let dateFormatter           = DateFormatter()
          dateFormatter.locale = Locale(identifier: "en_US_POSIX") 
          dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ssZ"
-         dateFormatter.timeZone      = .current
-
+         dateFormatter.timeZone  = .current
          return dateFormatter.date(from: self)
      }
-
 
      func convertToDisplayFormat() -> String {
          guard let date = self.convertToDate() else { return "N/A" }

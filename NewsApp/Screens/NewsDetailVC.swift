@@ -45,7 +45,6 @@ class NewsDetailVC: UIViewController, SFSafariViewControllerDelegate {
         self.view.addSubview(newsDescription)
         self.view.addSubview(newsButton)
 
-
         self.newsInfoStack.addArrangedSubview(authorNameView)
         self.newsInfoStack.addArrangedSubview(dateView)
 
@@ -54,10 +53,10 @@ class NewsDetailVC: UIViewController, SFSafariViewControllerDelegate {
         newsDescription.backgroundColor = Configuration.Color.clearColor
 
         newsImage.snp.makeConstraints { (make) in
-            make.left.equalToSuperview().offset(padding)
-            make.right.equalToSuperview().offset(-padding)
-            make.top.equalToSuperview().offset(padding)
-            make.height.equalTo(view.snp.height).multipliedBy(0.45)
+            make.left.equalToSuperview()
+            make.right.equalToSuperview()
+            make.top.equalToSuperview()
+            make.height.equalTo(view.snp.height).multipliedBy(0.4)
         }
 
         newsTitle.snp.makeConstraints { (make) in
@@ -95,9 +94,9 @@ class NewsDetailVC: UIViewController, SFSafariViewControllerDelegate {
         let backButton = UIBarButtonItem()
         backButton.title = ""
         self.navigationController?.navigationBar.topItem?.backBarButtonItem = backButton
-        let favoriteButton = UIBarButtonItem(image: UIImage(systemName: Configuration.IconImage.favoritesImageSF), style: .plain, target: self, action: #selector(favoriteButtonTapped))
+        let favoriteButton = UIBarButtonItem(image: UIImage(systemName: Configuration.IconImage.favoritesIcon), style: .plain, target: self, action: #selector(favoriteButtonTapped))
         let shareButton = UIBarButtonItem(barButtonSystemItem: .action, target: self, action: #selector(shareButtonTapped))
-        shareButton.tintColor = .black
+        shareButton.tintColor = Configuration.Color.blackColor
         navigationItem.rightBarButtonItems = [favoriteButton, shareButton]
     }
 
@@ -119,8 +118,16 @@ class NewsDetailVC: UIViewController, SFSafariViewControllerDelegate {
     }
 
     @objc func favoriteButtonTapped() {
-        showToast(title: "Favorite news", text: "This news has been added to your favorite list.", delay: 2)
-        viewModel.makeFavoriteNews()
+        viewModel.checkIsNewsFavorite() { [weak self] (isFavorite) in
+            guard let self = self else { return }
+            if isFavorite {
+                Alerts.showAlert(controller: self, title: "Warning", message: "You have added this news to your favorite list before. You cannot add it again.") {}
+                return
+            } else {
+                self.showToast(title: "Favorite news", text: "This news has been added to your favorite list.", delay: 2)
+                self.viewModel.makeFavoriteNews()
+            }
+        }
     }
 
     @objc func newsSourceTapped() {

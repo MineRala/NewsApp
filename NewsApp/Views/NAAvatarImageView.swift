@@ -18,7 +18,7 @@ class NAAvatarImageView: UIImageView {
     }
 
     private func configure() {
-        sizeToFit()
+        contentMode = .scaleToFill
         translatesAutoresizingMaskIntoConstraints = false
     }
 
