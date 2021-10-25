@@ -73,7 +73,6 @@ class NewsCell: UITableViewCell {
             make.right.equalToSuperview().offset(-padding)
             make.top.equalTo(newsTitle.snp.top).offset(padding)
             make.left.equalTo(newsDescription.snp.right).offset(padding)
-
         }
     }
 

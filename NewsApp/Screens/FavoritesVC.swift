@@ -57,7 +57,7 @@ class FavoritesVC: UIViewController, UITableViewDataSource, UITableViewDelegate 
         emptyListLabel.backgroundColor = Configuration.Color.clearColor
         emptyListLabel.textAlignment = .center
         emptyListLabel.adjustsFontForContentSizeCategory = true
-        emptyListLabel.text = "Your favorite news list is empty!"
+        emptyListLabel.text = NSLocalizedString("Your favorite news list is empty!", comment: "")
         self.view.addSubview(emptyListLabel)
         emptyListLabel.snp.makeConstraints { (make) in
         make.edges.equalToSuperview()
@@ -116,7 +116,7 @@ class FavoritesVC: UIViewController, UITableViewDataSource, UITableViewDelegate 
     }
 
     func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
-        let delete = UIContextualAction(style: .normal, title: "Delete") { [weak self] (action, view, completionHandler) in
+        let delete = UIContextualAction(style: .normal, title: NSLocalizedString("Delete", comment: "")) { [weak self] (action, view, completionHandler) in
             guard let self = self else{
             completionHandler(false)
             return
@@ -130,7 +130,7 @@ class FavoritesVC: UIViewController, UITableViewDataSource, UITableViewDelegate 
     }
 
     private func handleDelete(indexPath: IndexPath) {
-        Alerts.showAlertDelete(controller: self, "Are you sure you want to delete this news from favorite list?") { [self] in
+        Alerts.showAlertDelete(controller: self, NSLocalizedString("Are you sure you want to delete this news from favorite list?", comment: "")) { [self] in
             self.viewModel.deleteFavoriteNewsItem(item: self.viewModel.favoritedNews[indexPath.row])
             viewModel.getFavoritedNewsItem()
             tableViewFavorites.deleteRows(at: [indexPath], with: .fade)

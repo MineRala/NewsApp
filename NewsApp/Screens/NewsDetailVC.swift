@@ -12,7 +12,7 @@ class NewsDetailVC: UIViewController, SFSafariViewControllerDelegate {
     private lazy var newsTitle = NATitleLabel(fontSize: 16)
     private lazy var newsDescription = NATextView()
     private lazy var newsImage = NAAvatarImageView(frame: .zero)
-    private lazy var newsButton = NAButton(backgroundColor: Configuration.Color.buttonBackgroundColor, title: "News Source", textColor: Configuration.Color.buttonTextColor)
+    private lazy var newsButton = NAButton(backgroundColor: Configuration.Color.buttonBackgroundColor, title: NSLocalizedString("News Source", comment: ""), textColor: Configuration.Color.buttonTextColor)
     private lazy var padding: CGFloat = 8
 
     var viewModel = NewsDetailViewModel()
@@ -104,9 +104,9 @@ class NewsDetailVC: UIViewController, SFSafariViewControllerDelegate {
         let url = URL(string: viewModel.news?.image ?? "")
         newsImage.kf.setImage(with: url, placeholder: Configuration.IconImage.placeholder)
         newsTitle.text = viewModel.news?.title
-        authorNameView.setText(text: viewModel.news?.author  ?? "Unknown Author")
-        dateView.setText(text: viewModel.news?.publishDate ?? "Unknown Date")
-        newsDescription.text = viewModel.news?.description ?? "Unknown Description"
+        authorNameView.setText(text: viewModel.news?.author  ?? NSLocalizedString("Unknown Author", comment: ""))
+        dateView.setText(text: viewModel.news?.publishDate ?? NSLocalizedString("Unknown Date", comment: ""))
+        newsDescription.text = viewModel.news?.description ?? NSLocalizedString("Unknown Description", comment: "")
     }
 
     @objc func shareButtonTapped() {
@@ -121,10 +121,10 @@ class NewsDetailVC: UIViewController, SFSafariViewControllerDelegate {
         viewModel.checkIsNewsFavorite() { [weak self] (isFavorite) in
             guard let self = self else { return }
             if isFavorite {
-                Alerts.showAlert(controller: self, title: "Warning", message: "You have added this news to your favorite list before. You cannot add it again.") {}
+                Alerts.showAlert(controller: self, title: NSLocalizedString("Warning", comment: ""), message: NSLocalizedString("You have added this news to your favorite list before. You cannot add it again.", comment: "")) {}
                 return
             } else {
-                self.showToast(title: "Favorite news", text: "This news has been added to your favorite list.", delay: 2)
+                self.showToast(title: NSLocalizedString("Favorite news", comment: ""), text: NSLocalizedString("This news has been added to your favorite list.", comment: ""), delay: 2)
                 self.viewModel.makeFavoriteNews()
             }
         }

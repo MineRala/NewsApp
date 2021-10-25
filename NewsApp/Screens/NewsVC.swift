@@ -44,6 +44,7 @@ class NewsVC: UIViewController, UITableViewDataSource, UITableViewDelegate, UISe
     private func createSearchBar() {
         navigationItem.searchController = searchVC
         searchVC.searchBar.delegate = self
+        searchVC.searchBar.placeholder = NSLocalizedString("Search News", comment: "")
     }
 
     private func configureTableView() {
