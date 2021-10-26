@@ -7,8 +7,6 @@
 
 import UIKit
 
-//var KeyWindow : UIWindow { UIApplication.shared.windows.first(where: { $0.isKeyWindow })! }
-
 struct Configuration {
 
     enum Font: String {
@@ -27,7 +25,6 @@ struct Configuration {
         static let favoritesIcon = "heart"
         static let calendarIcon = "calendar"
         static let authorIcon = "newspaper.fill"
-        static let favoriteFillIcon = "heart.circle.fill"
     }
 
     struct Color {

@@ -13,7 +13,7 @@ class FavoritesVC: UIViewController, UITableViewDataSource, UITableViewDelegate 
     private lazy var tableViewFavorites = UITableView()
     private lazy var emptyListLabel = NATitleLabel(fontSize: 24)
 
-    let viewModel = FavoritesTableViewModel()
+    var viewModel = FavoritesTableViewModel()
 
     override func viewDidLoad() {
         super.viewDidLoad()
