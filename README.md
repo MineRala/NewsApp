@@ -1,6 +1,5 @@
 # NewsApp
 
-
 <p align="center">
   <img src="https://img.shields.io/badge/Platform-iOS%2013.0+-lightgrey.svg" alt="Platform: iOS">
 <a href="https://developer.apple.com/swift/"><img src="https://img.shields.io/badge/Swift-5.0-orange.svg?style=flat" alt="Swift"/></a>
@@ -22,7 +21,8 @@
 - CocoaPods was used.(Kingfisher)
 
 ## 3rd Party Libraries
-> <a href="https://github.com/Alamofire/Alamofire">Alamofire</a>
+> <a href="https://github.com/onevcat/Kingfisher">Kingfisher</a>\
+> > <a href="https://github.com/SnapKit/SnapKit">SnapKit</a>
 
 ### Method to use SwiftPM:
 Select Xcode menu `File > Swift Packages > Add Package Dependency` and enter repository URL with GUI.  
