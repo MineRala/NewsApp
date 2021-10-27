@@ -22,7 +22,7 @@
 
 ## 3rd Party Libraries
 > <a href="https://github.com/onevcat/Kingfisher">Kingfisher</a>\
-> > <a href="https://github.com/SnapKit/SnapKit">SnapKit</a>
+> <a href="https://github.com/SnapKit/SnapKit">SnapKit</a>
 
 ### Method to use SwiftPM:
 Select Xcode menu `File > Swift Packages > Add Package Dependency` and enter repository URL with GUI.  
