@@ -17,11 +17,11 @@
 - Core Data was used.
 
 # Features
-- Added localizable feature for 3 languages.
-- Swift Package Manager used (SnapKit)
-- CocoaPods used.(Kingfisher)
+- Added localizable feature for 2 languages.
+- Swift Package Manager was used. (SnapKit)
+- CocoaPods was used.(Kingfisher)
 
-# 3rd Party Libraries
+## 3rd Party Libraries
 > <a href="https://github.com/Alamofire/Alamofire">Alamofire</a>
 
 ### Method to use SwiftPM:
