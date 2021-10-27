@@ -32,7 +32,10 @@ class NAView: UIView {
         self.viewType = viewType
         configure(viewType: viewType)
     }
+}
 
+//MARK: - Configure
+extension NAView {
     private func configure(viewType: ViewType) {
         self.addSubview(textLabel)
         self.addSubview(iconImage)
@@ -57,7 +60,10 @@ class NAView: UIView {
             make.height.equalToSuperview().multipliedBy(0.5)
         }
     }
+}
 
+//MARK: - Set Text
+extension NAView {
     func setText(text: String) {
         if viewType == .authorNameView {
             iconImage.image = UIImage(systemName: Configuration.IconImage.authorIcon)

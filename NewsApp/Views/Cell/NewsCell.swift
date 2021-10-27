@@ -38,7 +38,10 @@ class NewsCell: UITableViewCell {
         newsDescription.text = nil
         newsImage.image = nil
     }
+}
 
+//MARK: - Configure
+extension NewsCell {
     private func configureCell() {
         self.contentView.addSubview(containerView)
         self.containerView.addSubview(newsTitle)
@@ -75,7 +78,10 @@ class NewsCell: UITableViewCell {
             make.left.equalTo(newsDescription.snp.right).offset(padding)
         }
     }
+}
 
+//MARK: - Set Cell
+extension NewsCell {
     func setCell(title: String, description: String) {
         newsTitle.text = title
         newsDescription.text = description

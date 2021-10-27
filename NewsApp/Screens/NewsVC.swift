@@ -8,7 +8,7 @@
 import UIKit
 import Kingfisher
 
-class NewsVC: UIViewController, UITableViewDataSource, UITableViewDelegate, UISearchBarDelegate, NewsViewModelDelegate {
+class NewsVC: UIViewController {
 
     private lazy var tableViewNews = UITableView()
     var viewModel = NewsViewModel()
@@ -17,6 +17,10 @@ class NewsVC: UIViewController, UITableViewDataSource, UITableViewDelegate, UISe
     var pageSearch: Int = 1
     private lazy var searchVC = UISearchController(searchResultsController: nil)
 
+}
+
+//MARK: - Lifecycle
+extension NewsVC {
     override func viewDidLoad() {
         super.viewDidLoad()
         setUpUI()
@@ -27,21 +31,27 @@ class NewsVC: UIViewController, UITableViewDataSource, UITableViewDelegate, UISe
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
     }
+}
 
+//MARK: - SetUpUI
+extension NewsVC {
     private func setUpUI() {
         self.view.backgroundColor = Configuration.Color.viewBackground
         configureNavigationBarTitle()
-        createSearchBar()
+        configureSearchBar()
         configureTableView()
 
     }
+}
 
+//MARK: - Configure
+extension NewsVC {
     private func configureNavigationBarTitle() {
         let attributes = [NSAttributedString.Key.foregroundColor: Configuration.Color.titleColor, NSAttributedString.Key.font : UIFont(name: Configuration.Font.medium.rawValue, size: 24)!]
         self.navigationController?.navigationBar.titleTextAttributes = attributes as [NSAttributedString.Key : Any]
     }
 
-    private func createSearchBar() {
+    private func configureSearchBar() {
         navigationItem.searchController = searchVC
         searchVC.searchBar.delegate = self
         searchVC.searchBar.placeholder = NSLocalizedString("Search News", comment: "")
@@ -59,7 +69,30 @@ class NewsVC: UIViewController, UITableViewDataSource, UITableViewDelegate, UISe
         tableViewNews.delegate = self
         tableViewNews.register(NewsCell.self, forCellReuseIdentifier: NewsCell.reuseID)
     }
+}
 
+
+//MARK: - Pagination
+extension NewsVC {
+    func scrollViewDidEndDragging(_ scrollView: UIScrollView, willDecelerate decelerate: Bool) {
+        let offsetY = scrollView.contentOffset.y
+        let contentHeight = scrollView.contentSize.height
+        let height = scrollView.frame.size.height
+
+        if offsetY > contentHeight - height {
+            if searchNewsText.isEmpty {
+                page += 1
+                self.viewModel.loadNews(page: self.page)
+            } else {
+                pageSearch += 1
+                viewModel.loadNewsBySearch(query: searchNewsText, page: pageSearch)
+            }
+        }
+    }
+
+}
+//MARK: - NewsViewModel Delegate
+extension NewsVC: NewsViewModelDelegate {
     func loadIndicatorForApiRequestCompleted() {
         DispatchQueue.main.async {
             self.showLoadingView()
@@ -77,7 +110,10 @@ class NewsVC: UIViewController, UITableViewDataSource, UITableViewDelegate, UISe
             self.tableViewNews.reloadData()
         }
     }
+}
 
+//MARK: - SearchBar Delegate
+extension NewsVC: UISearchBarDelegate {
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
         guard let text = searchBar.text, !text.isEmpty else { return }
         viewModel.loadNewsBySearch(query: text, page: 1)
@@ -92,21 +128,10 @@ class NewsVC: UIViewController, UITableViewDataSource, UITableViewDelegate, UISe
         self.searchVC.dismiss(animated: true, completion: nil)
     }
 
-    func scrollViewDidEndDragging(_ scrollView: UIScrollView, willDecelerate decelerate: Bool) {
-        let offsetY = scrollView.contentOffset.y
-        let contentHeight = scrollView.contentSize.height
-        let height = scrollView.frame.size.height
+}
 
-        if offsetY > contentHeight - height {
-            if searchNewsText.isEmpty {
-                page += 1
-                self.viewModel.loadNews(page: self.page)
-            } else {
-                pageSearch += 1
-                viewModel.loadNewsBySearch(query: searchNewsText, page: pageSearch)
-            }
-        }
-    }
+//MARK: - TableView Delegate & Datasource
+extension NewsVC: UITableViewDataSource, UITableViewDelegate {
 
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return viewModel.getNumberOfRowsInNewsList()

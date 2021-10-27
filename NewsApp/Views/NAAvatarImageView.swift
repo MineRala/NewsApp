@@ -16,10 +16,12 @@ class NAAvatarImageView: UIImageView {
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
+}
 
+//MARK: - Configure
+extension NAAvatarImageView {
     private func configure() {
         contentMode = .scaleToFill
         translatesAutoresizingMaskIntoConstraints = false
     }
-
 }

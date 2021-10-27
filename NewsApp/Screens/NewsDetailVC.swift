@@ -8,7 +8,7 @@
 import UIKit
 import SafariServices
 
-class NewsDetailVC: UIViewController, SFSafariViewControllerDelegate {
+class NewsDetailVC: UIViewController {
     private lazy var newsTitle = NATitleLabel(fontSize: 16)
     private lazy var newsDescription = NATextView()
     private lazy var newsImage = NAAvatarImageView(frame: .zero)
@@ -29,13 +29,19 @@ class NewsDetailVC: UIViewController, SFSafariViewControllerDelegate {
 
     private lazy var authorNameView = NAView(viewType: .authorNameView)
     private lazy var dateView = NAView(viewType: .dateView)
+}
 
+//MARK: - Lifecycle
+extension NewsDetailVC {
     override func viewDidLoad() {
         super.viewDidLoad()
         setUpUI()
         setData()
     }
+}
 
+//MARK: - SetUpUI
+extension NewsDetailVC {
     private func setUpUI() {
         self.view.backgroundColor = Configuration.Color.viewBackground
         configureNavigationBar()
@@ -88,7 +94,10 @@ class NewsDetailVC: UIViewController, SFSafariViewControllerDelegate {
         }
         newsButton.addTarget(self, action: #selector(newsSourceTapped), for: .touchUpInside)
     }
+}
 
+//MARK: - Configure NavigattionBar
+extension NewsDetailVC {
     private func configureNavigationBar() {
         self.navigationController!.navigationBar.tintColor = Configuration.Color.titleColor
         let backButton = UIBarButtonItem()
@@ -99,7 +108,10 @@ class NewsDetailVC: UIViewController, SFSafariViewControllerDelegate {
         shareButton.tintColor = Configuration.Color.blackColor
         navigationItem.rightBarButtonItems = [favoriteButton, shareButton]
     }
+}
 
+//MARK: - Set Data
+extension NewsDetailVC {
     private func setData() {
         let url = URL(string: viewModel.news?.image ?? "")
         newsImage.kf.setImage(with: url, placeholder: Configuration.IconImage.placeholder)
@@ -108,7 +120,10 @@ class NewsDetailVC: UIViewController, SFSafariViewControllerDelegate {
         dateView.setText(text: viewModel.news?.publishDate ?? NSLocalizedString("Unknown Date", comment: ""))
         newsDescription.text = viewModel.news?.description ?? NSLocalizedString("Unknown Description", comment: "")
     }
+}
 
+//MARK: - Actions
+extension NewsDetailVC {
     @objc func shareButtonTapped() {
         if let title = viewModel.news?.title, let author = viewModel.news.author, let newsWebsiteURL = NSURL(string: (viewModel.news?.urlLink)!) {
         let shareNews = [title, author, newsWebsiteURL] as [Any]
@@ -129,7 +144,10 @@ class NewsDetailVC: UIViewController, SFSafariViewControllerDelegate {
             }
         }
     }
+}
 
+//MARK: - SafariViewController Delegate
+extension NewsDetailVC: SFSafariViewControllerDelegate {
     @objc func newsSourceTapped() {
         guard let url = URL(string: (viewModel.news?.urlLink)!) else {
             print(NAError.invalidURLLink)

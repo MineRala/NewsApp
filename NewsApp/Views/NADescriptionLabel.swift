@@ -22,7 +22,10 @@ class NADescriptionLabel: UILabel {
         self.font = UIFont(name: Configuration.Font.regular.rawValue, size: fontSize)
         configure()
     }
+}
 
+//MARK: - Configure
+extension NADescriptionLabel {
     private func configure() {
         textColor = Configuration.Color.descriptionColor
         numberOfLines = 0

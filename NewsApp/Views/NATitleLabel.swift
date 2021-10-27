@@ -22,7 +22,10 @@ class NATitleLabel: UILabel {
        self.font = UIFont(name: Configuration.Font.bold.rawValue, size: fontSize)
        configure()
    }
+}
 
+//MARK: - Configure
+extension NATitleLabel {
    private func configure() {
     textColor = Configuration.Color.titleColor
     adjustsFontSizeToFitWidth = true

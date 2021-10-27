@@ -17,7 +17,10 @@ class NATextView: UITextView  {
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
+}
 
+//MARK: - Configure
+extension NATextView {
     private func configure() {
         self.font = UIFont(name: Configuration.Font.regular.rawValue, size: 14)
         textColor = Configuration.Color.descriptionColor

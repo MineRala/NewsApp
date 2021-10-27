@@ -8,23 +8,19 @@
 import UIKit
 import SnapKit
 
-class FavoritesVC: UIViewController, UITableViewDataSource, UITableViewDelegate {
+class FavoritesVC: UIViewController {
 
     private lazy var tableViewFavorites = UITableView()
     private lazy var emptyListLabel = NATitleLabel(fontSize: 24)
 
     var viewModel = FavoritesTableViewModel()
+}
 
+//MARK: - Lifecycle
+extension FavoritesVC {
     override func viewDidLoad() {
         super.viewDidLoad()
         setUpUI()
-    }
-
-    func setUpUI() {
-        self.view.backgroundColor = Configuration.Color.viewBackground
-        configureNavigationBarTitle()
-        configureTableView()
-        configureEmptyListLabel()
     }
 
     override func viewDidLayoutSubviews() {
@@ -37,7 +33,21 @@ class FavoritesVC: UIViewController, UITableViewDataSource, UITableViewDelegate 
         viewModel.getFavoritedNewsItem()
         reloadTableView()
     }
+}
 
+//MARK: - SetUpUI
+extension FavoritesVC {
+    func setUpUI() {
+        self.view.backgroundColor = Configuration.Color.viewBackground
+        configureNavigationBarTitle()
+        configureTableView()
+        configureEmptyListLabel()
+    }
+
+}
+
+//MARK: - Configure
+extension FavoritesVC {
     private func configureNavigationBarTitle() {
         let attributes = [NSAttributedString.Key.foregroundColor: Configuration.Color.titleColor, NSAttributedString.Key.font : UIFont(name: Configuration.Font.medium.rawValue, size: 24)!]
         self.navigationController?.navigationBar.titleTextAttributes = attributes as [NSAttributedString.Key : Any]
@@ -63,7 +73,10 @@ class FavoritesVC: UIViewController, UITableViewDataSource, UITableViewDelegate 
         make.edges.equalToSuperview()
         }
     }
+}
 
+//MARK: TableView Delegate & DataSource
+extension FavoritesVC: UITableViewDataSource, UITableViewDelegate {
     private func reloadTableView() {
         self.showLoadingView()
         if viewModel.favoritedNews.count == 0 {

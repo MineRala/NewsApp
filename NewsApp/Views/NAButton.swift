@@ -24,7 +24,10 @@ class NAButton: UIButton {
         setTitleColor(textColor, for: .normal)
         configure()
     }
+}
 
+//MARK: - Configure
+extension NAButton {
     private func configure() {
         layer.cornerRadius = 10
         titleLabel?.font = UIFont(name: Configuration.Font.medium.rawValue, size: 16)

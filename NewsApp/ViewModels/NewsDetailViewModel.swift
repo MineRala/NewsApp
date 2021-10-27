@@ -7,7 +7,7 @@
 
 import UIKit
 
-final class NewsDetailViewModel {
+class NewsDetailViewModel {
 
     private var persistanceManager = FavoritesTableViewModel()
     let context = AppDelegate.content
