@@ -13,7 +13,7 @@
 # Pages
 - News Screen
 - Detail News Screen
-- Favorite news Screen
+- Favorite News Screen
 
 # Compatibility
 - Requires iOS 13.0 or later. 
