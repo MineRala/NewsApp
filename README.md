@@ -8,7 +8,12 @@
 
 ## Iphone Screen
 
-<img width="160" alt="screen1" src="https://user-images.githubusercontent.com/47946453/139116697-1a3b73d8-9b98-4f59-8768-9d81767f2e4c.png">   <img width="160" alt="screen2" src="https://user-images.githubusercontent.com/47946453/139116704-15928c32-8e88-44fc-9088-f73e6fa8c8f5.png">.  <img width="160" alt="screen3" src="https://user-images.githubusercontent.com/47946453/139116709-5b7f8b5e-7c10-45ce-8f85-c4a9c44687b9.png">.  <img width="160" alt="screen4" src="https://user-images.githubusercontent.com/47946453/139116716-92693b2b-dd47-44ca-9604-b7d3e7c00044.png">   <img width="160" alt="screen5" src="https://user-images.githubusercontent.com/47946453/139116721-4d96f8e9-5557-4ea1-a6c5-8d1c3f2239a4.png">
+<img width="180" alt="screen1" src="https://user-images.githubusercontent.com/47946453/139116697-1a3b73d8-9b98-4f59-8768-9d81767f2e4c.png">   <img width="180" alt="screen2" src="https://user-images.githubusercontent.com/47946453/139116704-15928c32-8e88-44fc-9088-f73e6fa8c8f5.png">.  <img width="180" alt="screen3" src="https://user-images.githubusercontent.com/47946453/139116709-5b7f8b5e-7c10-45ce-8f85-c4a9c44687b9.png">.  <img width="180" alt="screen4" src="https://user-images.githubusercontent.com/47946453/139116716-92693b2b-dd47-44ca-9604-b7d3e7c00044.png">   <img width="180" alt="screen5" src="https://user-images.githubusercontent.com/47946453/139116721-4d96f8e9-5557-4ea1-a6c5-8d1c3f2239a4.png">
+
+# Pages
+- News Screen
+- Detail News Screen
+- Favorite news Screen
 
 # Compatibility
 - Requires iOS 13.0 or later. 
