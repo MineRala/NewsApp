@@ -19,7 +19,7 @@ class NATitleLabel: UILabel {
 
    init(fontSize: CGFloat) {
        super.init(frame: .zero)
-       self.font = UIFont(name: Configuration.Font.bold.rawValue, size: fontSize)
+       self.font = UIFont(name: Configure.Font.bold.rawValue, size: fontSize)
        configure()
    }
 }
@@ -27,7 +27,7 @@ class NATitleLabel: UILabel {
 //MARK: - Configure
 extension NATitleLabel {
    private func configure() {
-    textColor = Configuration.Color.titleColor
+    textColor = Configure.Color.titleColor
     adjustsFontSizeToFitWidth = true
     numberOfLines = 0
     minimumScaleFactor = 0.9

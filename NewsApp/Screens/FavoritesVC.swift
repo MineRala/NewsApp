@@ -38,7 +38,7 @@ extension FavoritesVC {
 //MARK: - SetUpUI
 extension FavoritesVC {
     func setUpUI() {
-        self.view.backgroundColor = Configuration.Color.viewBackground
+        self.view.backgroundColor = Configure.Color.viewBackground
         configureNavigationBarTitle()
         configureTableView()
         configureEmptyListLabel()
@@ -49,14 +49,14 @@ extension FavoritesVC {
 //MARK: - Configure
 extension FavoritesVC {
     private func configureNavigationBarTitle() {
-        let attributes = [NSAttributedString.Key.foregroundColor: Configuration.Color.titleColor, NSAttributedString.Key.font : UIFont(name: Configuration.Font.medium.rawValue, size: 24)!]
+        let attributes = [NSAttributedString.Key.foregroundColor: Configure.Color.titleColor, NSAttributedString.Key.font : UIFont(name: Configure.Font.medium.rawValue, size: 24)!]
         self.navigationController?.navigationBar.titleTextAttributes = attributes as [NSAttributedString.Key : Any]
     }
 
     private func configureTableView() {
         self.view.addSubview(tableViewFavorites)
         tableViewFavorites.translatesAutoresizingMaskIntoConstraints = false
-        tableViewFavorites.backgroundColor = Configuration.Color.clearColor
+        tableViewFavorites.backgroundColor = Configure.Color.clearColor
         tableViewFavorites.dataSource = self
         tableViewFavorites.delegate = self
         tableViewFavorites.separatorStyle = .none
@@ -64,7 +64,7 @@ extension FavoritesVC {
     }
 
     private func configureEmptyListLabel() {
-        emptyListLabel.backgroundColor = Configuration.Color.clearColor
+        emptyListLabel.backgroundColor = Configure.Color.clearColor
         emptyListLabel.textAlignment = .center
         emptyListLabel.adjustsFontForContentSizeCategory = true
         emptyListLabel.text = NSLocalizedString("Your favorite news list is empty!", comment: "")
@@ -104,7 +104,7 @@ extension FavoritesVC: UITableViewDataSource, UITableViewDelegate {
         cell.selectionStyle = .none
         cell.newsTitle.text = cellItem.newsTitle
         cell.newsDescription.text = cellItem.newsDescription
-        cell.newsImage.kf.setImage(with: url, placeholder: Configuration.IconImage.placeholder)
+        cell.newsImage.kf.setImage(with: url, placeholder: Configure.IconImage.placeholder)
         return cell
     }
 
@@ -137,7 +137,7 @@ extension FavoritesVC: UITableViewDataSource, UITableViewDelegate {
         self.handleDelete(indexPath: indexPath)
         completionHandler(true)
         }
-        delete.backgroundColor = Configuration.Color.redColor
+        delete.backgroundColor = Configure.Color.redColor
         let configuration = UISwipeActionsConfiguration(actions: [delete])
         return configuration
     }

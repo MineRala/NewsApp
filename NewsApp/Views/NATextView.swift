@@ -22,8 +22,8 @@ class NATextView: UITextView  {
 //MARK: - Configure
 extension NATextView {
     private func configure() {
-        self.font = UIFont(name: Configuration.Font.regular.rawValue, size: 14)
-        textColor = Configuration.Color.descriptionColor
+        self.font = UIFont(name: Configure.Font.regular.rawValue, size: 14)
+        textColor = Configure.Color.descriptionColor
         isScrollEnabled = true
         isEditable = false
         translatesAutoresizingMaskIntoConstraints = false

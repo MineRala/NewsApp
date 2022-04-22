@@ -1,5 +1,5 @@
 //
-//  Configuration.swift
+//  Configure.swift
 //  NewsApp
 //
 //  Created by Mine Rala on 21.10.2021.
@@ -7,7 +7,7 @@
 
 import UIKit
 
-struct Configuration {
+struct Configure {
 
     enum Font: String {
         case bold = "Montserrat-Bold"

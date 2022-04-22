@@ -36,7 +36,7 @@ extension NewsVC {
 //MARK: - SetUpUI
 extension NewsVC {
     private func setUpUI() {
-        self.view.backgroundColor = Configuration.Color.viewBackground
+        self.view.backgroundColor = Configure.Color.viewBackground
         configureNavigationBarTitle()
         configureSearchBar()
         configureTableView()
@@ -47,7 +47,7 @@ extension NewsVC {
 //MARK: - Configure
 extension NewsVC {
     private func configureNavigationBarTitle() {
-        let attributes = [NSAttributedString.Key.foregroundColor: Configuration.Color.titleColor, NSAttributedString.Key.font : UIFont(name: Configuration.Font.medium.rawValue, size: 24)!]
+        let attributes = [NSAttributedString.Key.foregroundColor: Configure.Color.titleColor, NSAttributedString.Key.font : UIFont(name: Configure.Font.medium.rawValue, size: 24)!]
         self.navigationController?.navigationBar.titleTextAttributes = attributes as [NSAttributedString.Key : Any]
     }
 
@@ -64,7 +64,7 @@ extension NewsVC {
         tableViewNews.snp.makeConstraints { (make) in
             make.edges.equalToSuperview()
             }
-        tableViewNews.backgroundColor = Configuration.Color.clearColor
+        tableViewNews.backgroundColor = Configure.Color.clearColor
         tableViewNews.dataSource = self
         tableViewNews.delegate = self
         tableViewNews.register(NewsCell.self, forCellReuseIdentifier: NewsCell.reuseID)
@@ -143,7 +143,7 @@ extension NewsVC: UITableViewDataSource, UITableViewDelegate {
         let news = viewModel.news[indexPath.row]
         cell.setCell(title: news.title ?? "", description: news.description ?? "")
         let url = URL(string: viewModel.news[indexPath.row].image ?? "")
-        cell.newsImage.kf.setImage(with: url, placeholder: Configuration.IconImage.placeholder)
+        cell.newsImage.kf.setImage(with: url, placeholder: Configure.IconImage.placeholder)
         return cell
     }
 

@@ -18,7 +18,7 @@ class NewsCell: UITableViewCell {
 
     private lazy var containerView: UIView = {
         let view = UIView()
-        view.backgroundColor = Configuration.Color.cellBackgroundColor
+        view.backgroundColor = Configure.Color.cellBackgroundColor
         view.layer.cornerRadius = cornerRadius
         return view
     }()

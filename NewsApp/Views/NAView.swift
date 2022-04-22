@@ -43,8 +43,8 @@ extension NAView {
         layer.cornerRadius = 20
         layer.masksToBounds = true
         textLabel.minimumScaleFactor = 0.5
-        backgroundColor = Configuration.Color.titleColor
-        textLabel.textColor = Configuration.Color.viewBackground
+        backgroundColor = Configure.Color.titleColor
+        textLabel.textColor = Configure.Color.viewBackground
 
         iconImage.snp.makeConstraints { (make) in
             make.centerY.equalToSuperview()
@@ -66,10 +66,10 @@ extension NAView {
 extension NAView {
     func setText(text: String) {
         if viewType == .authorNameView {
-            iconImage.image = UIImage(systemName: Configuration.IconImage.authorIcon)
+            iconImage.image = UIImage(systemName: Configure.IconImage.authorIcon)
             textLabel.text = text
         } else {
-            iconImage.image = UIImage(systemName: Configuration.IconImage.calendarIcon)
+            iconImage.image = UIImage(systemName: Configure.IconImage.calendarIcon)
             textLabel.text = text.convertToDisplayFormat()
         }
     }

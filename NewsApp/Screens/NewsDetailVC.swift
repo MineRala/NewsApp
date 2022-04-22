@@ -12,7 +12,7 @@ class NewsDetailVC: UIViewController {
     private lazy var newsTitle = NATitleLabel(fontSize: 16)
     private lazy var newsDescription = NATextView()
     private lazy var newsImage = NAAvatarImageView(frame: .zero)
-    private lazy var newsButton = NAButton(backgroundColor: Configuration.Color.buttonBackgroundColor, title: NSLocalizedString("News Source", comment: ""), textColor: Configuration.Color.buttonTextColor)
+    private lazy var newsButton = NAButton(backgroundColor: Configure.Color.buttonBackgroundColor, title: NSLocalizedString("News Source", comment: ""), textColor: Configure.Color.buttonTextColor)
     private lazy var padding: CGFloat = 8
 
     var viewModel = NewsDetailViewModel()
@@ -43,7 +43,7 @@ extension NewsDetailVC {
 //MARK: - SetUpUI
 extension NewsDetailVC {
     private func setUpUI() {
-        self.view.backgroundColor = Configuration.Color.viewBackground
+        self.view.backgroundColor = Configure.Color.viewBackground
         configureNavigationBar()
         self.view.addSubview(newsImage)
         self.view.addSubview(newsTitle)
@@ -54,9 +54,9 @@ extension NewsDetailVC {
         self.newsInfoStack.addArrangedSubview(authorNameView)
         self.newsInfoStack.addArrangedSubview(dateView)
 
-        newsImage.backgroundColor = Configuration.Color.clearColor
-        newsTitle.backgroundColor = Configuration.Color.clearColor
-        newsDescription.backgroundColor = Configuration.Color.clearColor
+        newsImage.backgroundColor = Configure.Color.clearColor
+        newsTitle.backgroundColor = Configure.Color.clearColor
+        newsDescription.backgroundColor = Configure.Color.clearColor
 
         newsImage.snp.makeConstraints { (make) in
             make.left.equalToSuperview()
@@ -99,13 +99,13 @@ extension NewsDetailVC {
 //MARK: - Configure NavigattionBar
 extension NewsDetailVC {
     private func configureNavigationBar() {
-        self.navigationController!.navigationBar.tintColor = Configuration.Color.titleColor
+        self.navigationController!.navigationBar.tintColor = Configure.Color.titleColor
         let backButton = UIBarButtonItem()
         backButton.title = ""
         self.navigationController?.navigationBar.topItem?.backBarButtonItem = backButton
-        let favoriteButton = UIBarButtonItem(image: UIImage(systemName: Configuration.IconImage.favoritesIcon), style: .plain, target: self, action: #selector(favoriteButtonTapped))
+        let favoriteButton = UIBarButtonItem(image: UIImage(systemName: Configure.IconImage.favoritesIcon), style: .plain, target: self, action: #selector(favoriteButtonTapped))
         let shareButton = UIBarButtonItem(barButtonSystemItem: .action, target: self, action: #selector(shareButtonTapped))
-        shareButton.tintColor = Configuration.Color.blackColor
+        shareButton.tintColor = Configure.Color.blackColor
         navigationItem.rightBarButtonItems = [favoriteButton, shareButton]
     }
 }
@@ -114,7 +114,7 @@ extension NewsDetailVC {
 extension NewsDetailVC {
     private func setData() {
         let url = URL(string: viewModel.news?.image ?? "")
-        newsImage.kf.setImage(with: url, placeholder: Configuration.IconImage.placeholder)
+        newsImage.kf.setImage(with: url, placeholder: Configure.IconImage.placeholder)
         newsTitle.text = viewModel.news?.title
         authorNameView.setText(text: viewModel.news?.author  ?? NSLocalizedString("Unknown Author", comment: ""))
         dateView.setText(text: viewModel.news?.publishDate ?? NSLocalizedString("Unknown Date", comment: ""))

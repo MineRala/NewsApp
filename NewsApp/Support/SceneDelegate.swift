@@ -23,22 +23,22 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
     private func createTabbar() -> UITabBarController {
         let tabbar = UITabBarController()
-        UITabBar.appearance().tintColor = Configuration.Color.tabbarTintColor
+        UITabBar.appearance().tintColor = Configure.Color.tabbarTintColor
         tabbar.viewControllers = [createNewsNC(),createFavoritesNC()]
         return tabbar
     }
 
     private func createNewsNC() -> UINavigationController {
         let newsVC = NewsVC()
-        newsVC.title = NSLocalizedString("Appcent News App", comment: "")
-        newsVC.tabBarItem = UITabBarItem(title: NSLocalizedString("News", comment: ""), image: UIImage(systemName: Configuration.IconImage.newsIcon), tag: 0)
+        newsVC.title = NSLocalizedString("News App", comment: "")
+        newsVC.tabBarItem = UITabBarItem(title: NSLocalizedString("News", comment: ""), image: UIImage(systemName: Configure.IconImage.newsIcon), tag: 0)
         return UINavigationController(rootViewController: newsVC)
     }
 
     private func createFavoritesNC() -> UINavigationController {
         let favoritesNC = FavoritesVC()
         favoritesNC.title = NSLocalizedString("Favorites", comment: "")
-        favoritesNC.tabBarItem = UITabBarItem(title: NSLocalizedString("Favorites", comment: ""), image: UIImage(systemName: Configuration.IconImage.favoritesIcon), tag: 1)
+        favoritesNC.tabBarItem = UITabBarItem(title: NSLocalizedString("Favorites", comment: ""), image: UIImage(systemName: Configure.IconImage.favoritesIcon), tag: 1)
         return UINavigationController(rootViewController: favoritesNC)
     }
 

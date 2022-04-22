@@ -30,7 +30,7 @@ class NAButton: UIButton {
 extension NAButton {
     private func configure() {
         layer.cornerRadius = 10
-        titleLabel?.font = UIFont(name: Configuration.Font.medium.rawValue, size: 16)
+        titleLabel?.font = UIFont(name: Configure.Font.medium.rawValue, size: 16)
         translatesAutoresizingMaskIntoConstraints = false
     }
 

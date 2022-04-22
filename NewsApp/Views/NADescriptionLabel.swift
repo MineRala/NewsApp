@@ -19,7 +19,7 @@ class NADescriptionLabel: UILabel {
 
     init(fontSize: CGFloat) {
         super.init(frame: .zero)
-        self.font = UIFont(name: Configuration.Font.regular.rawValue, size: fontSize)
+        self.font = UIFont(name: Configure.Font.regular.rawValue, size: fontSize)
         configure()
     }
 }
@@ -27,7 +27,7 @@ class NADescriptionLabel: UILabel {
 //MARK: - Configure
 extension NADescriptionLabel {
     private func configure() {
-        textColor = Configuration.Color.descriptionColor
+        textColor = Configure.Color.descriptionColor
         numberOfLines = 0
         minimumScaleFactor = 0.75
         translatesAutoresizingMaskIntoConstraints = false
