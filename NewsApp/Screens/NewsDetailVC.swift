@@ -114,7 +114,7 @@ extension NewsDetailVC {
 extension NewsDetailVC {
     private func setData() {
         let url = URL(string: viewModel.news?.image ?? "")
-        newsImage.kf.setImage(with: url, placeholder: Configure.IconImage.placeholder)
+        newsImage.kf.setImage(with: url, placeholder: UIImage(named: Configure.IconImage.placeholder))
         newsTitle.text = viewModel.news?.title
         authorNameView.setText(text: viewModel.news?.author  ?? NSLocalizedString("Unknown Author", comment: ""))
         dateView.setText(text: viewModel.news?.publishDate ?? NSLocalizedString("Unknown Date", comment: ""))

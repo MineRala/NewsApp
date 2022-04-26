@@ -143,7 +143,7 @@ extension NewsVC: UITableViewDataSource, UITableViewDelegate {
         let news = viewModel.news[indexPath.row]
         cell.setCell(title: news.title ?? "", description: news.description ?? "")
         let url = URL(string: viewModel.news[indexPath.row].image ?? "")
-        cell.newsImage.kf.setImage(with: url, placeholder: Configure.IconImage.placeholder)
+        cell.newsImage.kf.setImage(with: url, placeholder: UIImage(named: Configure.IconImage.placeholder))
         return cell
     }
 

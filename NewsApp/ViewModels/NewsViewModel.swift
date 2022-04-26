@@ -7,7 +7,7 @@
 
 import Foundation
 
-protocol NewsViewModelDelegate: class {
+protocol NewsViewModelDelegate: AnyObject {
     func loadIndicatorForApiRequestCompleted()
     func dissmissIndicatorForApiRequestCompleted()
     func reloadTableViewAfterIndicator()

@@ -101,10 +101,9 @@ extension FavoritesVC: UITableViewDataSource, UITableViewDelegate {
         cell.selectionStyle = .none
         let cellItem = viewModel.favoritedNews[indexPath.row]
         let url = URL(string: cellItem.newsImage ?? "")
-        cell.selectionStyle = .none
         cell.newsTitle.text = cellItem.newsTitle
         cell.newsDescription.text = cellItem.newsDescription
-        cell.newsImage.kf.setImage(with: url, placeholder: Configure.IconImage.placeholder)
+        cell.newsImage.kf.setImage(with: url, placeholder: UIImage(named: Configure.IconImage.placeholder))
         return cell
     }
 

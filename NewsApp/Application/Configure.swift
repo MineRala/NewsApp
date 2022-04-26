@@ -20,7 +20,8 @@ struct Configure {
     }
 
     enum IconImage {
-        static let placeholder = UIImage(named: "icon")
+//        UIImage(named: "icon")
+        static let placeholder = "icon"
         static let newsIcon = "newspaper"
         static let favoritesIcon = "heart"
         static let calendarIcon = "calendar"
@@ -28,8 +29,8 @@ struct Configure {
     }
 
     struct Color {
-        static var tabbarTintColor: UIColor {UIColor.black}
-        static var clearColor: UIColor {UIColor.clear}
+        static var tabbarTintColor: UIColor {#colorLiteral(red: 0, green: 0, blue: 0, alpha: 1)}
+        static var clearColor: UIColor {#colorLiteral(red: 0, green: 0, blue: 0, alpha: 0)}
         static var viewBackground: UIColor {#colorLiteral(red: 0.9411764706, green: 0.9411764706, blue: 0.9411764706, alpha: 1)}
         static var titleColor: UIColor {#colorLiteral(red: 0.3254901961, green: 0.3254901961, blue: 0.3254901961, alpha: 1)}
         static var descriptionColor: UIColor {#colorLiteral(red: 0.4392156863, green: 0.4392156863, blue: 0.4392156863, alpha: 1)}
