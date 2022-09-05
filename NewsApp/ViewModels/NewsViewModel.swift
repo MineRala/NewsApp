@@ -28,11 +28,11 @@ class NewsViewModel {
 extension NewsViewModel: NetworkManagerDelegate {
     func topNewsFetched(page: Int) {
         self.delegate?.loadIndicatorForApiRequestCompleted()
-        service.makeRequest(endpoint: .topNews(page: page)) { result in
+        service.makeRequest(endpoint: .topNews(page: page), type: NewsModel.self) { result in
             self.delegate?.dissmissIndicatorForApiRequestCompleted()
             switch result {
             case .success(let news):
-                page == 1 ? self.news = news : self.news.append(contentsOf: news)
+                page == 1 ? self.news = news.articles : self.news.append(contentsOf: news.articles)
                 self.delegate?.reloadTableViewAfterIndicator()
             case .failure(let error):
                 print(error)
@@ -42,10 +42,10 @@ extension NewsViewModel: NetworkManagerDelegate {
     
     func newsBySearchFetched(query: String, page: Int) {
         self.delegate?.loadIndicatorForApiRequestCompleted()
-        service.makeRequest(endpoint: .newsBySearch(query: query, page: page)) { result in
+        service.makeRequest(endpoint: .newsBySearch(query: query, page: page), type:    NewsModel.self) { result in
             switch result {
             case .success(let news):
-                page == 1 ? self.news = news : self.news.append(contentsOf: news)
+                page == 1 ? self.news = news.articles : self.news.append(contentsOf: news.articles)
                 self.delegate?.reloadTableViewAfterIndicator()
             case .failure(let error):
                 print(error)
