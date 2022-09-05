@@ -7,14 +7,8 @@
 
 import Foundation
 
-struct NewsModel: Codable {
+struct NewsModel: Decodable {
     let status: String
     let totalResults: Int
     let articles: [Articles]
-
-    enum CodingKeys: String, CodingKey {
-        case status = "status"
-        case articles = "articles"
-        case totalResults = "totalResults"
-    }
 }

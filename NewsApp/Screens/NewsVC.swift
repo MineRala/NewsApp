@@ -25,7 +25,7 @@ extension NewsVC {
         super.viewDidLoad()
         setUpUI()
         viewModel.delegate = self
-        viewModel.loadNews(page: 1)
+        viewModel.topNewsFetched(page: 1)
     }
 
     override func viewDidLayoutSubviews() {
@@ -82,10 +82,10 @@ extension NewsVC {
         if offsetY > contentHeight - height {
             if searchNewsText.isEmpty {
                 page += 1
-                self.viewModel.loadNews(page: self.page)
+                self.viewModel.topNewsFetched(page: self.page)
             } else {
                 pageSearch += 1
-                viewModel.loadNewsBySearch(query: searchNewsText, page: pageSearch)
+                viewModel.newsBySearchFetched(query: searchNewsText, page: pageSearch)
             }
         }
     }
@@ -116,7 +116,7 @@ extension NewsVC: NewsViewModelDelegate {
 extension NewsVC: UISearchBarDelegate {
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
         guard let text = searchBar.text, !text.isEmpty else { return }
-        viewModel.loadNewsBySearch(query: text, page: 1)
+        viewModel.newsBySearchFetched(query: text, page: 1)
         self.searchVC.dismiss(animated: true, completion: nil)
         print(text)
         searchNewsText = text
@@ -124,7 +124,7 @@ extension NewsVC: UISearchBarDelegate {
     }
 
     func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
-        viewModel.loadNews(page: 1)
+        viewModel.topNewsFetched(page: 1)
         self.searchVC.dismiss(animated: true, completion: nil)
     }
 

@@ -14,43 +14,42 @@ protocol NewsViewModelDelegate: AnyObject {
 }
 
 class NewsViewModel {
-
+    
     weak var delegate: NewsViewModelDelegate?
     private var service = NetworkManager.shared
-
+    
     var news: [Articles] = []
-
-    func loadNews(page: Int) {
-        self.delegate?.loadIndicatorForApiRequestCompleted()
-        service.getTopNews(page: page) { result in
-            self.delegate?.dissmissIndicatorForApiRequestCompleted()
-            switch result {
-            case .success(let news):
-                page == 1 ? self.news = news : self.news.append(contentsOf: news)
-                self.delegate?.reloadTableViewAfterIndicator()
-            case .failure(let error):
-                print(error)
-            }
-
-        }
-    }
-
-    func loadNewsBySearch(query: String, page: Int) {
-        self.delegate?.loadIndicatorForApiRequestCompleted()
-        service.getNewsBySearch(with:query, page: page) { result in
-            self.delegate?.dissmissIndicatorForApiRequestCompleted()
-            switch result {
-            case .success(let news):
-                page == 1 ? self.news = news : self.news.append(contentsOf: news)
-                self.delegate?.reloadTableViewAfterIndicator()
-            case .failure(let error):
-                print(error)
-            }
-
-        }
-    }
 
     func getNumberOfRowsInNewsList() -> Int {
         return news.count
+    }
+}
+
+extension NewsViewModel: NetworkManagerDelegate {
+    func topNewsFetched(page: Int) {
+        self.delegate?.loadIndicatorForApiRequestCompleted()
+        service.makeRequest(endpoint: .topNews(page: page)) { result in
+            self.delegate?.dissmissIndicatorForApiRequestCompleted()
+            switch result {
+            case .success(let news):
+                page == 1 ? self.news = news : self.news.append(contentsOf: news)
+                self.delegate?.reloadTableViewAfterIndicator()
+            case .failure(let error):
+                print(error)
+            }
+        }
+    }
+    
+    func newsBySearchFetched(query: String, page: Int) {
+        self.delegate?.loadIndicatorForApiRequestCompleted()
+        service.makeRequest(endpoint: .newsBySearch(query: query, page: page)) { result in
+            switch result {
+            case .success(let news):
+                page == 1 ? self.news = news : self.news.append(contentsOf: news)
+                self.delegate?.reloadTableViewAfterIndicator()
+            case .failure(let error):
+                print(error)
+            }
+        }
     }
 }

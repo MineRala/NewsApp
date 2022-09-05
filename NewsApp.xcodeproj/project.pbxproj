@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		026134981DBA6F554361AF06 /* Pods_NewsApp.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4A471FE2CD3B454C0F47E5FA /* Pods_NewsApp.framework */; };
+		E818F44728C600A200C0E13A /* Endpoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = E818F44628C600A200C0E13A /* Endpoint.swift */; };
 		E82505E82724C09F000EFE44 /* ErrorMessage.swift in Sources */ = {isa = PBXBuildFile; fileRef = E82505E72724C09F000EFE44 /* ErrorMessage.swift */; };
 		E82505EC2724C0C0000EFE44 /* Configure.swift in Sources */ = {isa = PBXBuildFile; fileRef = E82505EB2724C0C0000EFE44 /* Configure.swift */; };
 		E82505EF2724C0D3000EFE44 /* DateString+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = E82505EE2724C0D3000EFE44 /* DateString+Ext.swift */; };
@@ -62,6 +63,7 @@
 /* Begin PBXFileReference section */
 		36471B8A7BA70D89F0D2894A /* Pods-NewsApp.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-NewsApp.debug.xcconfig"; path = "Target Support Files/Pods-NewsApp/Pods-NewsApp.debug.xcconfig"; sourceTree = "<group>"; };
 		4A471FE2CD3B454C0F47E5FA /* Pods_NewsApp.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_NewsApp.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		E818F44628C600A200C0E13A /* Endpoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Endpoint.swift; sourceTree = "<group>"; };
 		E82505E72724C09F000EFE44 /* ErrorMessage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ErrorMessage.swift; sourceTree = "<group>"; };
 		E82505EB2724C0C0000EFE44 /* Configure.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Configure.swift; sourceTree = "<group>"; };
 		E82505EE2724C0D3000EFE44 /* DateString+Ext.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "DateString+Ext.swift"; sourceTree = "<group>"; };
@@ -152,6 +154,7 @@
 			isa = PBXGroup;
 			children = (
 				E82505E72724C09F000EFE44 /* ErrorMessage.swift */,
+				E818F44628C600A200C0E13A /* Endpoint.swift */,
 			);
 			path = Utilities;
 			sourceTree = "<group>";
@@ -392,7 +395,7 @@
 			);
 			mainGroup = E83DD70A27205E4C001FDF45;
 			packageReferences = (
-				E8E4EA24272152FD00889156 /* XCRemoteSwiftPackageReference "SnapKit.git" */,
+				E8E4EA24272152FD00889156 /* XCRemoteSwiftPackageReference "SnapKit" */,
 			);
 			productRefGroup = E83DD71427205E4C001FDF45 /* Products */;
 			projectDirPath = "";
@@ -495,6 +498,7 @@
 				E82505F22724C101000EFE44 /* NetworkManager.swift in Sources */,
 				E8E4EA48272156DD00889156 /* FavoritesViewModel.swift in Sources */,
 				E82506102724C200000EFE44 /* NewsViewModel.swift in Sources */,
+				E818F44728C600A200C0E13A /* Endpoint.swift in Sources */,
 				E82505FC2724C14B000EFE44 /* NewsDetailVC.swift in Sources */,
 				E82D19DD2725A2EA00E0DDB0 /* Alerts.swift in Sources */,
 				E82D19E32725A81800E0DDB0 /* UIViewController+Ext.swift in Sources */,
@@ -720,7 +724,7 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
-		E8E4EA24272152FD00889156 /* XCRemoteSwiftPackageReference "SnapKit.git" */ = {
+		E8E4EA24272152FD00889156 /* XCRemoteSwiftPackageReference "SnapKit" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/SnapKit/SnapKit.git";
 			requirement = {
@@ -733,7 +737,7 @@
 /* Begin XCSwiftPackageProductDependency section */
 		E8E4EA25272152FD00889156 /* SnapKit */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = E8E4EA24272152FD00889156 /* XCRemoteSwiftPackageReference "SnapKit.git" */;
+			package = E8E4EA24272152FD00889156 /* XCRemoteSwiftPackageReference "SnapKit" */;
 			productName = SnapKit;
 		};
 /* End XCSwiftPackageProductDependency section */
