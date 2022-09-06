@@ -20,10 +20,10 @@ struct Configure {
     }
 
     enum IconImage {
-//        UIImage(named: "icon")
         static let placeholder = "icon"
         static let newsIcon = "newspaper"
         static let favoritesIcon = "heart"
+        static let favoritesFillIcon = "heart.fill"
         static let calendarIcon = "calendar"
         static let authorIcon = "newspaper.fill"
     }

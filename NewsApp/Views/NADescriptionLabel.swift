@@ -32,5 +32,4 @@ extension NADescriptionLabel {
         minimumScaleFactor = 0.75
         translatesAutoresizingMaskIntoConstraints = false
     }
-
 }

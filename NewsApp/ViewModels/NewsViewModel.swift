@@ -25,6 +25,7 @@ class NewsViewModel {
     }
 }
 
+//MARK: - NetworkManagerDelegate
 extension NewsViewModel: NetworkManagerDelegate {
     func topNewsFetched(page: Int) {
         self.delegate?.loadIndicatorForApiRequestCompleted()
@@ -42,7 +43,8 @@ extension NewsViewModel: NetworkManagerDelegate {
     
     func newsBySearchFetched(query: String, page: Int) {
         self.delegate?.loadIndicatorForApiRequestCompleted()
-        service.makeRequest(endpoint: .newsBySearch(query: query, page: page), type:    NewsModel.self) { result in
+        service.makeRequest(endpoint: .newsBySearch(query: query, page: page), type: NewsModel.self) { result in
+            self.delegate?.dissmissIndicatorForApiRequestCompleted()
             switch result {
             case .success(let news):
                 page == 1 ? self.news = news.articles : self.news.append(contentsOf: news.articles)

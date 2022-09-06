@@ -16,7 +16,6 @@ class NewsVC: UIViewController {
     var page: Int = 1
     var pageSearch: Int = 1
     private lazy var searchVC = UISearchController(searchResultsController: nil)
-
 }
 
 //MARK: - Lifecycle
@@ -27,10 +26,6 @@ extension NewsVC {
         viewModel.delegate = self
         viewModel.topNewsFetched(page: 1)
     }
-
-    override func viewDidLayoutSubviews() {
-        super.viewDidLayoutSubviews()
-    }
 }
 
 //MARK: - SetUpUI
@@ -40,7 +35,6 @@ extension NewsVC {
         configureNavigationBarTitle()
         configureSearchBar()
         configureTableView()
-
     }
 }
 
@@ -89,7 +83,6 @@ extension NewsVC {
             }
         }
     }
-
 }
 //MARK: - NewsViewModel Delegate
 extension NewsVC: NewsViewModelDelegate {

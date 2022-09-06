@@ -34,5 +34,4 @@ extension NATitleLabel {
     lineBreakMode = .byTruncatingTail
     translatesAutoresizingMaskIntoConstraints = false
    }
-
 }

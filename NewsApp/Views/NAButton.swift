@@ -33,5 +33,4 @@ extension NAButton {
         titleLabel?.font = UIFont(name: Configure.Font.medium.rawValue, size: 16)
         translatesAutoresizingMaskIntoConstraints = false
     }
-
 }

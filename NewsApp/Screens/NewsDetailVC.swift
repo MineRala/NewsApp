@@ -15,7 +15,7 @@ class NewsDetailVC: UIViewController {
     private lazy var newsButton = NAButton(backgroundColor: Configure.Color.buttonBackgroundColor, title: NSLocalizedString("News Source", comment: ""), textColor: Configure.Color.buttonTextColor)
     private lazy var padding: CGFloat = 8
 
-    var viewModel = NewsDetailViewModel()
+    let viewModel = NewsDetailViewModel()
 
     private lazy var newsInfoStack: UIStackView = {
         let stackView = UIStackView()
@@ -26,6 +26,10 @@ class NewsDetailVC: UIViewController {
         stackView.translatesAutoresizingMaskIntoConstraints = false
         return stackView
     }()
+    
+    private let backButton = UIBarButtonItem()
+    private lazy var favoriteButton = UIBarButtonItem()
+    private lazy var shareButton = UIBarButtonItem()
 
     private lazy var authorNameView = NAView(viewType: .authorNameView)
     private lazy var dateView = NAView(viewType: .dateView)
@@ -37,6 +41,18 @@ extension NewsDetailVC {
         super.viewDidLoad()
         setUpUI()
         setData()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        viewModel.checkIsNewsFavorite() { [weak self] (isFavorite) in
+            guard let self = self else { return }
+            if isFavorite {
+                self.favoriteButton.image = UIImage(systemName: Configure.IconImage.favoritesFillIcon)
+            } else {
+                self.favoriteButton.image = UIImage(systemName: Configure.IconImage.favoritesIcon)
+            }
+        }
     }
 }
 
@@ -100,11 +116,10 @@ extension NewsDetailVC {
 extension NewsDetailVC {
     private func configureNavigationBar() {
         self.navigationController!.navigationBar.tintColor = Configure.Color.titleColor
-        let backButton = UIBarButtonItem()
         backButton.title = ""
         self.navigationController?.navigationBar.topItem?.backBarButtonItem = backButton
-        let favoriteButton = UIBarButtonItem(image: UIImage(systemName: Configure.IconImage.favoritesIcon), style: .plain, target: self, action: #selector(favoriteButtonTapped))
-        let shareButton = UIBarButtonItem(barButtonSystemItem: .action, target: self, action: #selector(shareButtonTapped))
+        favoriteButton = UIBarButtonItem(image: UIImage(systemName: Configure.IconImage.favoritesIcon), style: .plain, target: self, action: #selector(favoriteButtonTapped))
+        shareButton = UIBarButtonItem(barButtonSystemItem: .action, target: self, action: #selector(shareButtonTapped))
         shareButton.tintColor = Configure.Color.blackColor
         navigationItem.rightBarButtonItems = [favoriteButton, shareButton]
     }
@@ -139,6 +154,7 @@ extension NewsDetailVC {
                 Alerts.showAlert(controller: self, title: NSLocalizedString("Warning", comment: ""), message: NSLocalizedString("You have added this news to your favorite list before. You cannot add it again.", comment: "")) {}
                 return
             } else {
+                self.favoriteButton.image = UIImage(systemName: Configure.IconImage.favoritesFillIcon )
                 self.showToast(title: NSLocalizedString("Favorite news", comment: ""), text: NSLocalizedString("This news has been added to your favorite list.", comment: ""), delay: 2)
                 self.viewModel.makeFavoriteNews()
             }

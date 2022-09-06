@@ -28,5 +28,4 @@ extension NATextView {
         isEditable = false
         translatesAutoresizingMaskIntoConstraints = false
     }
-
 }
